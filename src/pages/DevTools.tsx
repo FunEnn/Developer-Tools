@@ -41,14 +41,14 @@ export const DevTools = () => {
             常用开发工具集合
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 bg-gray-100/50">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
           <Tabs defaultValue="json" className="w-full">
             <TabsList className="grid w-full grid-cols-4 md:grid-cols-8 gap-4 rounded-lg dark:bg-gray-800/50 backdrop-blur-sm p-2">
               {tools.map(({ id, label, icon: Icon }) => (
                 <TabsTrigger
                   key={id}
                   value={id}
-                  className="rounded-md transition-all hover:bg-white/80 dark:hover:bg-gray-700/80 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm"
+                  className="rounded-md transition-all hover:bg-white/80 dark:hover:bg-gray-700/80 data-[state=active]:bg-gray-200 dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm"
                 >
                   <div className="flex flex-col items-center gap-1">
                     <Icon className="h-5 w-5" />
