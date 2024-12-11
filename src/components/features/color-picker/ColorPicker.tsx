@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 export const ColorPicker = () => {
   const [color1, setColor1] = useState("#000000");
@@ -13,8 +14,11 @@ export const ColorPicker = () => {
   ) => {
     const newColor = e.target.value;
     setColor(newColor);
-    setGradient(`linear-gradient(to right, ${color1}, ${color2})`);
   };
+
+  useEffect(() => {
+    setGradient(`linear-gradient(to right, ${color1}, ${color2})`);
+  }, [color1, color2]);
 
   return (
     <div className="space-y-6">
@@ -29,6 +33,14 @@ export const ColorPicker = () => {
             onChange={(e) => handleColorChange(e, setColor1)}
             className="w-full h-40 rounded-lg cursor-pointer"
           />
+          <div className="mt-2">
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-sm">CSS:</span>
+              <code className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-sm flex-1">
+                background: {color1};
+              </code>
+            </div>
+          </div>
         </div>
 
         <div className="space-y-4">
@@ -41,6 +53,14 @@ export const ColorPicker = () => {
             onChange={(e) => handleColorChange(e, setColor2)}
             className="w-full h-40 rounded-lg cursor-pointer"
           />
+          <div className="mt-2">
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-sm">CSS:</span>
+              <code className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-sm flex-1">
+                background: {color2};
+              </code>
+            </div>
+          </div>
         </div>
       </div>
 

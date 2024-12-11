@@ -1,34 +1,8 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useNavigate } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 import React from "react";
-import {
-  JsonEditor,
-  RegexTester,
-  ColorPicker,
-  Base64Tool,
-} from "@/components/features";
-import { 
-  Code2, 
-  FileJson, 
-  Regex, 
-  Palette, 
-  KeyRound,
-  Hash,
-  Timer,
-  Binary
-} from "lucide-react";
-
-export const DevTools = () => {
-  const tools = [
-    { id: "json", label: "JSON工具", icon: FileJson, component: JsonEditor },
-    { id: "regex", label: "正则测试", icon: Regex, component: RegexTester },
-    { id: "color", label: "颜色工具", icon: Palette, component: ColorPicker },
-    { id: "base64", label: "编码转换", icon: Binary, component: Base64Tool },
-    // 新增工具占位
-    { id: "jwt", label: "JWT解析", icon: KeyRound, component: () => <div>开发中...</div> },
-    { id: "hash", label: "哈希计算", icon: Hash, component: () => <div>开发中...</div> },
-    { id: "time", label: "时间转换", icon: Timer, component: () => <div>开发中...</div> },
-    { id: "format", label: "代码格式化", icon: Code2, component: () => <div>开发��...</div> },
-  ];
+export const DevTools = ({ tools }) => {
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -41,31 +15,37 @@ export const DevTools = () => {
             常用开发工具集合
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-          <Tabs defaultValue="json" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 md:grid-cols-8 gap-4 rounded-lg dark:bg-gray-800/50 backdrop-blur-sm p-2">
-              {tools.map(({ id, label, icon: Icon }) => (
-                <TabsTrigger
-                  key={id}
-                  value={id}
-                  className="rounded-md transition-all hover:bg-white/80 dark:hover:bg-gray-700/80 data-[state=active]:bg-gray-200 dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm"
-                >
-                  <div className="flex flex-col items-center gap-1">
-                    <Icon className="h-5 w-5" />
-                    <span className="text-xs">{label}</span>
-                  </div>
-                </TabsTrigger>
-              ))}
-            </TabsList>
 
-            <div className="mt-6">
-              {tools.map(({ id, component: Component }) => (
-                <TabsContent key={id} value={id} className="focus-visible:outline-none">
-                  <Component />
-                </TabsContent>
-              ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {tools.map((category) => (
+            <div key={category.category} className="space-y-4">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                {category.category}
+              </h2>
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                {category.items.map((tool) => {
+                  const Icon = tool.icon;
+                  return (
+                    <div
+                      key={tool.id}
+                      className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer border-b last:border-b-0 border-gray-100 dark:border-gray-700"
+                      onClick={() => navigate(`/tools/${tool.id}`)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                          <Icon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                        </div>
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {tool.label}
+                        </span>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-gray-400" />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </Tabs>
+          ))}
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
