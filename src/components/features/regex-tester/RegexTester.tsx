@@ -1,10 +1,23 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface Match {
   text: string;
   index: number;
   groups?: { [key: string]: string };
 }
+
+// 常用正则表达式选项
+const commonPatterns = [
+  { label: "电子邮件", pattern: "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" },
+  { label: "电话号码", pattern: "^\\+?[1-9]\\d{1,14}$" },
+  { label: "URL", pattern: "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$" },
+  { label: "邮政编码", pattern: "^\\d{5}(-\\d{4})?$" },
+  {
+    label: "IP 地址",
+    pattern:
+      "^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$",
+  },
+];
 
 export const RegexTester = () => {
   const [pattern, setPattern] = useState("");
@@ -43,7 +56,7 @@ export const RegexTester = () => {
           index: match.index,
           groups: match.groups,
         });
-        
+
         if (!flags.includes("g")) break;
       }
 
@@ -57,15 +70,35 @@ export const RegexTester = () => {
   };
 
   const toggleFlag = (flag: string) => {
-    setFlags(prev => 
-      prev.includes(flag)
-        ? prev.replace(flag, "")
-        : prev + flag
+    setFlags((prev) =>
+      prev.includes(flag) ? prev.replace(flag, "") : prev + flag
     );
+  };
+
+  const handlePatternSelect = (selectedPattern: string) => {
+    setPattern(selectedPattern);
   };
 
   return (
     <div className="space-y-6">
+      {/* 常用正则表达式选择 */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          常用正则表达式
+        </label>
+        <select
+          onChange={(e) => handlePatternSelect(e.target.value)}
+          className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
+        >
+          <option value="">选择一个常用正则表达式</option>
+          {commonPatterns.map((option) => (
+            <option key={option.label} value={option.pattern}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {/* 正则表达式输入 */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

@@ -8,6 +8,14 @@ import {
   RegexTester,
   ColorPicker,
   Base64Tool,
+  TimeConverter,
+  JwtTool,
+  HashTool,
+  CodeFormatter,
+  ImageConverter,
+  ImageCompressor,
+  SvgEditor,
+  QrCodeTool,
 } from "@/components/features";
 import {
   Code2,
@@ -18,6 +26,8 @@ import {
   Hash,
   Timer,
   Binary,
+  Image,
+  QrCode,
 } from "lucide-react";
 
 export const tools = [
@@ -29,13 +39,13 @@ export const tools = [
         id: "jwt",
         label: "JWT解析",
         icon: KeyRound,
-        component: () => <div>开发中...</div>,
+        component: JwtTool,
       },
       {
         id: "hash",
         label: "哈希计算",
         icon: Hash,
-        component: () => <div>开发中...</div>,
+        component: HashTool,
       },
     ],
   },
@@ -48,7 +58,13 @@ export const tools = [
         id: "format",
         label: "代码格式化",
         icon: Code2,
-        component: () => <div>开发中...</div>,
+        component: CodeFormatter,
+      },
+      {
+        id: "qrcode",
+        label: "二维码工具",
+        icon: QrCode,
+        component: QrCodeTool,
       },
     ],
   },
@@ -60,8 +76,26 @@ export const tools = [
         id: "time",
         label: "时间转换",
         icon: Timer,
-        component: () => <div>开发中...</div>,
+        component: TimeConverter,
       },
+    ],
+  },
+  {
+    category: "图像工具",
+    items: [
+      {
+        id: "image-convert",
+        label: "图片转换",
+        icon: Image,
+        component: ImageConverter,
+      },
+      {
+        id: "image-compress",
+        label: "图片压缩",
+        icon: Image,
+        component: ImageCompressor,
+      },
+      { id: "svg-editor", label: "SVG编辑", icon: Image, component: SvgEditor },
     ],
   },
 ];

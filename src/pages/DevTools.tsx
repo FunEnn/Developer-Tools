@@ -3,7 +3,6 @@ import { ChevronRight } from "lucide-react";
 import React from "react";
 export const DevTools = ({ tools }) => {
   const navigate = useNavigate();
-
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-8">
