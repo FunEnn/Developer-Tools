@@ -33,11 +33,10 @@
 - Lucide Icons
 - Monaco Editor
 
-## 📦 安装
+## 📦 安装依赖
 
-cd Developer-Tools
-npm install
+pnpm install
 
 ## 📦 运行
 
-npm run dev
+pnpm run dev
