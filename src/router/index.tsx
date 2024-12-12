@@ -16,6 +16,9 @@ import {
   ImageCompressor,
   SvgEditor,
   QrCodeTool,
+  MarkdownEditor,
+  TypographyTool,
+  EmojiPicker,
 } from "@/components/features";
 import {
   Code2,
@@ -28,12 +31,10 @@ import {
   Binary,
   Image,
   QrCode,
-  Grid,
-  Box,
-  Layout,
   Type,
+  FileText,
+  Smile,
 } from "lucide-react";
-import { TypographyTool } from "../components/features";
 
 export const tools = [
   {
@@ -71,6 +72,12 @@ export const tools = [
         icon: QrCode,
         component: QrCodeTool,
       },
+      {
+        id: "markdown",
+        label: "Markdown编辑器",
+        icon: FileText,
+        component: MarkdownEditor,
+      },
     ],
   },
   {
@@ -88,6 +95,12 @@ export const tools = [
         label: "字体工具",
         icon: Type,
         component: TypographyTool,
+      },
+      {
+        id: "emoji",
+        label: "表情工具",
+        icon: Smile,
+        component: EmojiPicker,
       },
     ],
   },

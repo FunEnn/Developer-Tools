@@ -10,4 +10,6 @@ export { default as ImageConverter } from "./image-tools/ImageConverter";
 export { default as ImageCompressor } from "./image-tools/ImageCompressor";
 export { default as SvgEditor } from "./image-tools/SvgEditor";
 export { default as QrCodeTool } from "./qrcode-tool/QrCodeTool";
-export { TypographyTool } from "./style-tools/TypographyTool";
+export { default as TypographyTool } from "./style-tools/TypographyTool";
+export { default as MarkdownEditor } from "./markdown-editor/MarkdownEditor";
+export { default as EmojiPicker } from "./emoji-tools/EmojiPicker";
