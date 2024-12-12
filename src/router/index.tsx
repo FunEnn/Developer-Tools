@@ -28,7 +28,12 @@ import {
   Binary,
   Image,
   QrCode,
+  Grid,
+  Box,
+  Layout,
+  Type,
 } from "lucide-react";
+import { TypographyTool } from "../components/features";
 
 export const tools = [
   {
@@ -77,6 +82,12 @@ export const tools = [
         label: "时间转换",
         icon: Timer,
         component: TimeConverter,
+      },
+      {
+        id: "typography",
+        label: "字体工具",
+        icon: Type,
+        component: TypographyTool,
       },
     ],
   },
