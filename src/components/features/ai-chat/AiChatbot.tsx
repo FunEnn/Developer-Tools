@@ -43,7 +43,7 @@ export const AiChatbot = () => {
       const data = await response.json();
       const content = typeof data.message === 'string' ? data.message : 
                      typeof data.message === 'object' ? JSON.stringify(data.message) : 
-                     '收到无���响应';
+                     '收到无效响应';
                      
       setMessages((prev) => [
         ...prev,
@@ -84,9 +84,9 @@ export const AiChatbot = () => {
               <ReactMarkdown
                 className="prose dark:prose-invert max-w-none"
                 components={{
-                  code({node, inline, className, children, ...props}) {
+                  code({className, children, ...props}: any) {
                     const match = /language-(\w+)/.exec(className || '');
-                    return !inline && match ? (
+                    return match ? (
                       <SyntaxHighlighter
                         style={vscDarkPlus}
                         language={match[1]}
