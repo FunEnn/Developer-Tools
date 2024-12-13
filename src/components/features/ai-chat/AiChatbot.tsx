@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Bot, Send, User } from "lucide-react";
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
-  isMarkdown?: boolean;
 }
 
 export const AiChatbot = () => {
@@ -44,7 +43,7 @@ export const AiChatbot = () => {
       const data = await response.json();
       const content = typeof data.message === 'string' ? data.message : 
                      typeof data.message === 'object' ? JSON.stringify(data.message) : 
-                     '收到无效响应';
+                     '收到无���响应';
                      
       setMessages((prev) => [
         ...prev,
@@ -82,7 +81,29 @@ export const AiChatbot = () => {
                   : "bg-gray-100 dark:bg-gray-800"
               }`}
             >
-              {String(message.content)}
+              <ReactMarkdown
+                className="prose dark:prose-invert max-w-none"
+                components={{
+                  code({node, inline, className, children, ...props}) {
+                    const match = /language-(\w+)/.exec(className || '');
+                    return !inline && match ? (
+                      <SyntaxHighlighter
+                        style={vscDarkPlus}
+                        language={match[1]}
+                        PreTag="div"
+                      >
+                        {String(children).replace(/\n$/, '')}
+                      </SyntaxHighlighter>
+                    ) : (
+                      <code className={className} {...props}>
+                        {children}
+                      </code>
+                    );
+                  }
+                }}
+              >
+                {message.content}
+              </ReactMarkdown>
             </div>
           </div>
         ))}
