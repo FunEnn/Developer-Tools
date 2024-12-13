@@ -6,6 +6,11 @@ import axios from "axios";
 
 type PromptTemplate = 'social' | 'ad' | 'article' | 'slogan';
 
+interface RichTextChild {
+  text?: string;
+  [key: string]: any;
+}
+
 dotenv.config();
 
 const app = express();
@@ -53,7 +58,10 @@ app.post("/api/chat", async (req: Request, res: Response) => {
       throw new Error('无法获取有效回复');
     }
 
-    const content = data.message.content.richText[0];
+    const richText = data.message.content.richText[0];
+    const content = richText.children
+      .map((child: RichTextChild) => typeof child === 'string' ? child : child.text || '')
+      .join('');
     res.json({ message: content });
 
   } catch (error: any) {
