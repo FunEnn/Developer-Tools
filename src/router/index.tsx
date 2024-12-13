@@ -19,6 +19,7 @@ import {
   MarkdownEditor,
   TypographyTool,
   EmojiPicker,
+  AiChatbot,
 } from "@/components/features";
 import {
   Code2,
@@ -34,9 +35,21 @@ import {
   Type,
   FileText,
   Smile,
+  Bot,
 } from "lucide-react";
 
 export const tools = [
+  {
+    category: "AI工具",
+    items: [
+      {
+        id: "ai-chat",
+        label: "AI助手",
+        icon: Bot,
+        component: AiChatbot,
+      },
+    ],
+  },
   {
     category: "编码转换",
     items: [

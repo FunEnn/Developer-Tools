@@ -13,3 +13,4 @@ export { default as QrCodeTool } from "./qrcode-tool/QrCodeTool";
 export { default as TypographyTool } from "./style-tools/TypographyTool";
 export { default as MarkdownEditor } from "./markdown-editor/MarkdownEditor";
 export { default as EmojiPicker } from "./emoji-tools/EmojiPicker";
+export { default as AiChatbot } from "./ai-chat/AiChatbot";
