@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
@@ -24,7 +24,7 @@ const openai = new OpenAI({
 });
 
 // AI 聊天接口
-app.post("/api/chat", async (req, res) => {
+app.post("/api/chat", async (req: Request, res: Response) => {
   try {
     const { message } = req.body;
     
@@ -66,7 +66,7 @@ app.post("/api/chat", async (req, res) => {
 });
 
 // 图片生成接口
-app.post("/api/generate-image", async (req, res) => {
+app.post("/api/generate-image", async (req: Request, res: Response) => {
   try {
     const { prompt } = req.body;
     const response = await openai.images.generate({
@@ -84,7 +84,7 @@ app.post("/api/generate-image", async (req, res) => {
 });
 
 // 代码生成接口
-app.post("/api/generate-code", async (req, res) => {
+app.post("/api/generate-code", async (req: Request, res: Response) => {
   try {
     const { prompt } = req.body;
     const completion = await openai.chat.completions.create({
@@ -107,7 +107,7 @@ app.post("/api/generate-code", async (req, res) => {
 });
 
 // 文案生成接口
-app.post("/api/generate-text", async (req, res) => {
+app.post("/api/generate-text", async (req: Request, res: Response) => {
   try {
     const { template, keywords } = req.body;
     const prompts: Record<PromptTemplate, string> = {
