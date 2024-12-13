@@ -138,30 +138,25 @@ export const tools = [
 ];
 
 // 创建路由配置
-export const router = createBrowserRouter(
-  [
-    {
-      path: "/",
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <ToolLayout>
+        <DevTools tools={tools} />
+      </ToolLayout>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  ...tools.flatMap((category) =>
+    category.items.map((tool) => ({
+      path: `/tools/${tool.id}`,
       element: (
         <ToolLayout>
-          <DevTools tools={tools} />
+          <tool.component />
         </ToolLayout>
       ),
       errorElement: <ErrorPage />,
-    },
-    ...tools.flatMap((category) =>
-      category.items.map((tool) => ({
-        path: `/tools/${tool.id}`,
-        element: (
-          <ToolLayout>
-            <tool.component />
-          </ToolLayout>
-        ),
-        errorElement: <ErrorPage />,
-      }))
-    ),
-  ],
-  {
-    basename: "/Developer-Tools",
-  }
-);
+    }))
+  ),
+]);
