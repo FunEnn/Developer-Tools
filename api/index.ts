@@ -82,7 +82,16 @@ app.post("/api/chat", async (req: TypedRequestBody<ChatRequest>, res: express.Re
     const content = richText.children
       .map((child: RichTextChild) => typeof child === 'string' ? child : child.text || '')
       .join('');
-    res.json({ message: content });
+
+    // 只提取分析理由
+    const regex = /\[.*?\]-\[问题:.*?\]-(.*)/;
+    const matches = content.match(regex);
+
+    if (!matches) {
+      throw new Error('响应格式不正确');
+    }
+
+    res.json({ message: matches[1].trim() });
 
   } catch (error: any) {
     console.error("Chat error:", error.response?.data || error.message);
