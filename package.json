@@ -19,6 +19,7 @@
     "@radix-ui/react-tabs": "^1.1.1",
     "@types/prettier": "^3.0.0",
     "@types/qrcode": "^1.5.5",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@vercel/speed-insights": "^1.1.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
@@ -40,6 +41,7 @@
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^7.0.2",
+    "react-syntax-highlighter": "^15.6.1",
     "rehype-highlight": "^7.0.1",
     "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.5.5",
@@ -48,6 +50,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "@tailwindcss/typography": "^0.5.15",
     "@types/cors": "^2.8.17",
     "@types/crypto-js": "^4.2.2",
     "@types/express": "^4.17.21",

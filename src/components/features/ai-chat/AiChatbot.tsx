@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Bot, Send, User } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  isMarkdown?: boolean;
 }
 
 export const AiChatbot = () => {
@@ -38,13 +42,13 @@ export const AiChatbot = () => {
       }
 
       const data = await response.json();
-      const content = typeof data.message === 'string' ? data.message : 
-                     typeof data.message === 'object' ? JSON.stringify(data.message) : 
-                     '收到无效响应';
-                     
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content }
+        { 
+          role: "assistant", 
+          content: data.message,
+          isMarkdown: data.isMarkdown 
+        }
       ]);
     } catch (error: any) {
       console.error("Error:", error);
@@ -78,7 +82,34 @@ export const AiChatbot = () => {
                   : "bg-gray-100 dark:bg-gray-800"
               }`}
             >
-              {String(message.content)}
+              {message.isMarkdown ? (
+                <ReactMarkdown
+                  className="prose dark:prose-invert max-w-none"
+                  components={{
+                    code({node, inline, className, children, ...props}) {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return !inline && match ? (
+                        <SyntaxHighlighter
+                          {...props}
+                          style={vscDarkPlus}
+                          language={match[1]}
+                          PreTag="div"
+                        >
+                          {String(children).replace(/\n$/, '')}
+                        </SyntaxHighlighter>
+                      ) : (
+                        <code {...props} className={className}>
+                          {children}
+                        </code>
+                      );
+                    }
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              ) : (
+                String(message.content)
+              )}
             </div>
           </div>
         ))}
