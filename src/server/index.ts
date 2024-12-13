@@ -7,6 +7,13 @@ import axios from "axios";
 // 定义类型
 type PromptTemplate = 'social' | 'ad' | 'article' | 'slogan';
 
+// 添加 RichTextChild 类型定义
+interface RichTextChild {
+  text?: string;
+  children?: RichTextChild[];
+  [key: string]: any;
+}
+
 interface TypedRequestBody<T> extends express.Request {
   body: T;
 }
