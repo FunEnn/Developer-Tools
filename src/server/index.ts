@@ -39,7 +39,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: ['http://localhost:5173', 'http://localhost:3001'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -47,9 +47,14 @@ app.use(cors({
 app.use(express.json());
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY || '',
   baseURL: 'http://api.aihao123.cn/luomacode-api/open-api/',
   timeout: 10000,
+});
+
+// 健康检查接口
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok", env: process.env.NODE_ENV });
 });
 
 // AI 聊天接口
@@ -166,7 +171,13 @@ app.post("/api/generate-text", async (req: TypedRequestBody<TextRequest>, res: e
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// 导出处理函数
+export default app;
+
+// 仅在开发环境启动服务器
+if (process.env.NODE_ENV === 'development') {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`Development server running on port ${PORT}`);
+  });
+}

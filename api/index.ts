@@ -39,7 +39,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: ['https://developer-tools-jet.vercel.app', 'http://localhost:5173'],
+  origin: ['http://localhost:5173', 'http://localhost:3001'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -62,12 +62,10 @@ app.post("/api/chat", async (req: TypedRequestBody<ChatRequest>, res: express.Re
   try {
     const { message } = req.body;
     
-    const systemPrompt = "请对下面的内容进行分类，并且描述出对应分类的理由。你只需要根据用户的内容输出下面几种类型：bug类型,用户体验问题，用户吐槽。输出格式:[类型]-[问题:{content}]-[分析的理由]";
 
     const response = await axios.post('https://api.aihao123.cn/luomacode-api/open-api/v1/chat/completions', {
       model: "gpt-3.5-turbo",
       messages: [
-        { role: "system", content: systemPrompt },
         { role: "user", content: message }
       ],
       stream: false
@@ -153,7 +151,7 @@ app.post("/api/generate-text", async (req: TypedRequestBody<TextRequest>, res: e
     const { template, keywords } = req.body;
     const prompts: Record<PromptTemplate, string> = {
       social: `为以下主题创建一个吸引人的社交媒体帖子：${keywords}`,
-      ad: `为以下产品或服务创建一个��告文案：${keywords}`,
+      ad: `为以下产品或服务创建一个广告文案：${keywords}`,
       article: `为以下主题生成一篇短文：${keywords}`,
       slogan: `为以下主题创建一个朗朗上口的标语：${keywords}`,
     };
