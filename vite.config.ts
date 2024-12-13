@@ -33,5 +33,4 @@ export default defineConfig({
       }
     },
   },
-  base: "/Developer-Tools/",
 });
