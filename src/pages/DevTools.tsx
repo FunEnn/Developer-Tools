@@ -5,7 +5,7 @@ import React from "react";
 interface Tool {
   id: string;
   label: string;
-  icon: React.ComponentType;
+  icon: React.ComponentType<{ className?: string }>;
   component: React.ComponentType;
 }
 
