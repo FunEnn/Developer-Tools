@@ -28,9 +28,15 @@ app.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
     
+    // 系统提示词
+    const systemPrompt = "请对下面的内容进行分类，并且描述出对应分类的理由。你只需要根据用户的内容输出下面几种类型：bug类型,用户体验问题，用户吐槽。输出格式:[类型]-[问题:{content}]-[分析的理由]";
+
     const response = await axios.post('https://api.aihao123.cn/luomacode-api/open-api/v1/chat/completions', {
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: message }
+      ],
       stream: false
     }, {
       headers: {
@@ -42,24 +48,12 @@ app.post("/api/chat", async (req, res) => {
     console.log('Raw API Response:', JSON.stringify(response.data, null, 2));
 
     const data = response.data;
-    
-    // 提取文本内容
-    let content = '';
-    if (data.message?.content?.richText?.[0]) {
-      const richText = data.message.content.richText[0];
-      if (typeof richText === 'string') {
-        content = richText;
-      } else if (richText.type === 'p' && Array.isArray(richText.children)) {
-        content = richText.children
-          .map(child => typeof child === 'string' ? child : child.text || '')
-          .join('');
-      }
-    }
-
-    if (!content) {
+    if (!data.message?.content?.richText?.[0]) {
+      console.error('Invalid response structure:', data);
       throw new Error('无法获取有效回复');
     }
 
+    const content = data.message.content.richText[0];
     res.json({ message: content });
 
   } catch (error: any) {

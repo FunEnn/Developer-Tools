@@ -2,7 +2,23 @@ import { useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import React from "react";
 
-export const DevTools = ({ tools }) => {
+interface Tool {
+  id: string;
+  label: string;
+  icon: React.ComponentType;
+  component: React.ComponentType;
+}
+
+interface Category {
+  category: string;
+  items: Tool[];
+}
+
+interface DevToolsProps {
+  tools: Category[];
+}
+
+export const DevTools = ({ tools }: DevToolsProps) => {
   const navigate = useNavigate();
 
   return (

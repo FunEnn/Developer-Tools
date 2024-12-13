@@ -2,7 +2,11 @@ import { Link, useLocation } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import React from "react";
 
-export const ToolLayout = ({ children }) => {
+interface ToolLayoutProps {
+  children: React.ReactNode;
+}
+
+export const ToolLayout = ({ children }: ToolLayoutProps) => {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
