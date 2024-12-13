@@ -1,14 +1,31 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
 import axios from "axios";
 
+// 定义类型
 type PromptTemplate = 'social' | 'ad' | 'article' | 'slogan';
 
-interface RichTextChild {
-  text?: string;
-  [key: string]: any;
+interface TypedRequestBody<T> extends express.Request {
+  body: T;
+}
+
+interface ChatRequest {
+  message: string;
+}
+
+interface ImageRequest {
+  prompt: string;
+}
+
+interface CodeRequest {
+  prompt: string;
+}
+
+interface TextRequest {
+  template: PromptTemplate;
+  keywords: string;
 }
 
 dotenv.config();
@@ -29,11 +46,10 @@ const openai = new OpenAI({
 });
 
 // AI 聊天接口
-app.post("/api/chat", async (req: Request, res: Response) => {
+app.post("/api/chat", async (req: TypedRequestBody<ChatRequest>, res: express.Response) => {
   try {
     const { message } = req.body;
     
-    // 系统提示词
     const systemPrompt = "请对下面的内容进行分类，并且描述出对应分类的理由。你只需要根据用户的内容输出下面几种类型：bug类型,用户体验问题，用户吐槽。输出格式:[类型]-[问题:{content}]-[分析的理由]";
 
     const response = await axios.post('https://api.aihao123.cn/luomacode-api/open-api/v1/chat/completions', {
@@ -50,11 +66,8 @@ app.post("/api/chat", async (req: Request, res: Response) => {
       }
     });
 
-    console.log('Raw API Response:', JSON.stringify(response.data, null, 2));
-
     const data = response.data;
     if (!data.message?.content?.richText?.[0]) {
-      console.error('Invalid response structure:', data);
       throw new Error('无法获取有效回复');
     }
 
@@ -74,7 +87,7 @@ app.post("/api/chat", async (req: Request, res: Response) => {
 });
 
 // 图片生成接口
-app.post("/api/generate-image", async (req: Request, res: Response) => {
+app.post("/api/generate-image", async (req: TypedRequestBody<ImageRequest>, res: express.Response) => {
   try {
     const { prompt } = req.body;
     const response = await openai.images.generate({
@@ -92,7 +105,7 @@ app.post("/api/generate-image", async (req: Request, res: Response) => {
 });
 
 // 代码生成接口
-app.post("/api/generate-code", async (req: Request, res: Response) => {
+app.post("/api/generate-code", async (req: TypedRequestBody<CodeRequest>, res: express.Response) => {
   try {
     const { prompt } = req.body;
     const completion = await openai.chat.completions.create({
@@ -100,8 +113,7 @@ app.post("/api/generate-code", async (req: Request, res: Response) => {
       messages: [
         {
           role: "system",
-          content:
-            "You are a helpful coding assistant. Provide code with explanations.",
+          content: "You are a helpful coding assistant. Provide code with explanations.",
         },
         { role: "user", content: prompt },
       ],
@@ -115,7 +127,7 @@ app.post("/api/generate-code", async (req: Request, res: Response) => {
 });
 
 // 文案生成接口
-app.post("/api/generate-text", async (req: Request, res: Response) => {
+app.post("/api/generate-text", async (req: TypedRequestBody<TextRequest>, res: express.Response) => {
   try {
     const { template, keywords } = req.body;
     const prompts: Record<PromptTemplate, string> = {
@@ -129,7 +141,7 @@ app.post("/api/generate-text", async (req: Request, res: Response) => {
       model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "你是一个专业的文案撰写专家。" },
-        { role: "user", content: prompts[template as PromptTemplate] }
+        { role: "user", content: prompts[template] }
       ],
     });
 
