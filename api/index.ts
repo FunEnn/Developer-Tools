@@ -66,15 +66,15 @@ app.post(
     try {
       const { message } = req.body;
 
-      const systemPrompt =
-        "请对下面的内容进行分类，并且描述出对应分类的理由。你只需要根据用户的内容输出下面几种类型：bug类型,用户体验问题，用户吐槽。输出格式:[类型]-[问题:{content}]-[分析的理由]";
-
       const response = await axios.post(
         "https://api.aihao123.cn/luomacode-api/open-api/v1/chat/completions",
         {
           model: "gpt-3.5-turbo",
           messages: [
-            { role: "system", content: systemPrompt },
+            {
+              role: "system",
+              content: "你是一个友好的助手，可以帮助用户解答各种问题。请用简洁、专业的方式回答。",
+            },
             { role: "user", content: message },
           ],
           stream: false,
@@ -99,15 +99,7 @@ app.post(
         )
         .join("");
 
-      // 只提取分析理由
-      const regex = /\[.*?\]-\[问题:.*?\]-(.*)/;
-      const matches = content.match(regex);
-
-      if (!matches) {
-        throw new Error("响应格式不正确");
-      }
-
-      res.json({ message: matches[1].trim() });
+      res.json({ message: content });
     } catch (error: any) {
       console.error("Chat error:", error.response?.data || error.message);
       res.status(500).json({
