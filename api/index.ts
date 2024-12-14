@@ -40,10 +40,15 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3001"],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    origin: [
+      'https://developer-tools-jet.vercel.app', 
+      'http://localhost:5173',
+      'https://developer-tools-git-main-luomacode.vercel.app', // 添加所有可能的域名
+      /\.vercel\.app$/ // 允许所有 vercel.app 子域名
+    ],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
   })
 );
 app.use(express.json());
