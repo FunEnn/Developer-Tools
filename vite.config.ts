@@ -35,14 +35,23 @@ export default defineConfig({
   },
   base: "/",
   build: {
-    assetsDir: "assets",
+    // 启用代码分割
     rollupOptions: {
       output: {
-        manualChunks: undefined,
-        assetFileNames: "assets/[name]-[hash][extname]",
-        chunkFileNames: "assets/[name]-[hash].js",
-        entryFileNames: "assets/[name]-[hash].js",
+        manualChunks: {
+          "react-vendor": ["react", "react-dom"],
+          markdown: ["react-markdown", "react-syntax-highlighter"],
+          ui: ["lucide-react"],
+        },
       },
     },
+    // 启用代码压缩
+    minify: "terser",
+    // 配置 chunk 大小警告限制
+    chunkSizeWarningLimit: 1000,
+  },
+  // 配置预加载
+  optimizeDeps: {
+    include: ["react", "react-dom", "react-markdown"],
   },
 });

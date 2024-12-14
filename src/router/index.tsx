@@ -3,24 +3,54 @@ import { createBrowserRouter } from "react-router-dom";
 import { DevTools } from "@/pages/DevTools";
 import { ErrorPage } from "@/pages/ErrorPage";
 import { ToolLayout } from "@/components/layout/ToolLayout";
-import {
-  JsonEditor,
-  RegexTester,
-  ColorPicker,
-  Base64Tool,
-  TimeConverter,
-  JwtTool,
-  HashTool,
-  CodeFormatter,
-  ImageConverter,
-  ImageCompressor,
-  SvgEditor,
-  QrCodeTool,
-  MarkdownEditor,
-  TypographyTool,
-  EmojiPicker,
-  AiChatbot,
-} from "@/components/features";
+export const JsonEditor = React.lazy(
+  () => import("../components/features/json-editor/JsonEditor")
+);
+export const RegexTester = React.lazy(
+  () => import("../components/features/regex-tester/RegexTester")
+);
+export const ColorPicker = React.lazy(
+  () => import("../components/features/color-picker/ColorPicker")
+);
+export const Base64Tool = React.lazy(
+  () => import("../components/features/base64-tool/Base64Tool")
+);
+export const TimeConverter = React.lazy(
+  () => import("../components/features/time-converter/TimeConverter")
+);
+export const JwtTool = React.lazy(
+  () => import("../components/features/jwt-tool/JwtTool")
+);
+export const HashTool = React.lazy(
+  () => import("../components/features/hash-tool/HashTool")
+);
+export const CodeFormatter = React.lazy(
+  () => import("../components/features/code-formatter/CodeFormatter")
+);
+export const ImageConverter = React.lazy(
+  () => import("../components/features/image-tools/ImageConverter")
+);
+export const ImageCompressor = React.lazy(
+  () => import("../components/features/image-tools/ImageCompressor")
+);
+export const SvgEditor = React.lazy(
+  () => import("../components/features/image-tools/SvgEditor")
+);
+export const QrCodeTool = React.lazy(
+  () => import("../components/features/qrcode-tool/QrCodeTool")
+);
+export const MarkdownEditor = React.lazy(
+  () => import("../components/features/markdown-editor/MarkdownEditor")
+);
+export const TypographyTool = React.lazy(
+  () => import("../components/features/style-tools/TypographyTool")
+);
+export const EmojiPicker = React.lazy(
+  () => import("../components/features/emoji-tools/EmojiPicker")
+);
+export const AiChatbot = React.lazy(
+  () => import("../components/features/ai-chat/AiChatbot")
+);
 import {
   Code2,
   FileJson,
