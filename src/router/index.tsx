@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { DevTools } from "@/pages/DevTools";
 import { ErrorPage } from "@/pages/ErrorPage";
 import { ToolLayout } from "@/components/layout/ToolLayout";
+import { Skeleton } from '@/components/ui/Skeleton';
 export const JsonEditor = React.lazy(
   () => import("../components/features/json-editor/JsonEditor")
 );
@@ -172,9 +173,11 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ToolLayout>
-        <DevTools tools={tools} />
-      </ToolLayout>
+      <Suspense fallback={<Skeleton />}>
+        <ToolLayout>
+          <DevTools tools={tools} />
+        </ToolLayout>
+      </Suspense>
     ),
     errorElement: <ErrorPage />,
   },
@@ -182,9 +185,11 @@ export const router = createBrowserRouter([
     category.items.map((tool) => ({
       path: `/tools/${tool.id}`,
       element: (
-        <ToolLayout>
-          <tool.component />
-        </ToolLayout>
+        <Suspense fallback={<Skeleton />}>
+          <ToolLayout>
+            <tool.component />
+          </ToolLayout>
+        </Suspense>
       ),
       errorElement: <ErrorPage />,
     }))

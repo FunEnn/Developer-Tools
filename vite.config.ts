@@ -49,9 +49,16 @@ export default defineConfig({
     minify: "terser",
     // 配置 chunk 大小警告限制
     chunkSizeWarningLimit: 1000,
+    cssCodeSplit: true,
+    cssMinify: true,
   },
   // 配置预加载
   optimizeDeps: {
     include: ["react", "react-dom", "react-markdown"],
   },
+  css: {
+    modules: {
+      localsConvention: 'camelCase'
+    }
+  }
 });
