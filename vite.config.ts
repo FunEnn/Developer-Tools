@@ -15,18 +15,19 @@ export default defineConfig({
     host: true,
     proxy: {
       "/api": {
-        target: process.env.NODE_ENV === 'production' 
-          ? "https://developer-tools-jet.vercel.app" 
-          : "http://localhost:3001",
+        target: process.env.VITE_API_URL || "http://localhost:3001",
         changeOrigin: true,
-        secure: false,
+        secure: true,
         rewrite: (path) => path,
       },
     },
   },
-  base: "/",
+  preview: {
+    port: 4173,
+    host: true,
+  },
+  base: "./",
   build: {
-    // 生产环境优化
     cssCodeSplit: true,
     cssMinify: true,
     rollupOptions: {
@@ -38,7 +39,8 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    sourcemap: true
   },
   // 配置预加载
   optimizeDeps: {
