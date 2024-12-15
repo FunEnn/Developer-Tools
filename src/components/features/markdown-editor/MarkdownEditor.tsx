@@ -27,6 +27,7 @@ const MarkdownEditor = () => {
   const [markdown, setMarkdown] = useState(
     "# Hello Markdown\n\n开始编写你的文档..."
   );
+  console.log(markdown);
   const [activeTab, setActiveTab] = useState<"write" | "preview">("write");
 
   const toolbarButtons = [
@@ -91,9 +92,17 @@ const MarkdownEditor = () => {
 
     const reader = new FileReader();
     reader.onload = (e) => {
-      setMarkdown(e.target?.result as string);
+      const content = e.target?.result as string;
+      setMarkdown(content);
+      // 立即保存到 localStorage
+      localStorage.setItem("markdown-content", content);
+      // 切换到编辑模式
+      setActiveTab("write");
     };
     reader.readAsText(file);
+    
+    // 清空 input 以允许重复上传相同文件
+    event.target.value = '';
   };
 
   const downloadMarkdown = () => {
@@ -178,6 +187,13 @@ const MarkdownEditor = () => {
     }
   };
 
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    setMarkdown(newValue);
+
+    // 自动保存到 localStorage
+    localStorage.setItem("markdown-content", newValue);
+  };
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -241,7 +257,7 @@ const MarkdownEditor = () => {
           </div>
           <textarea
             value={markdown}
-            onChange={(e) => setMarkdown(e.target.value)}
+            onChange={handleTextChange}
             onKeyDown={handleKeyDown}
             onDrop={handleDrop}
             onPaste={handlePaste}
