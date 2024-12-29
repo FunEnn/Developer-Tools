@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, Search } from "lucide-react";
+import { ChevronRight, Search, Github, Settings, Sun, Moon } from "lucide-react";
 import React, { useState, useMemo } from "react";
+import { useTheme } from "../hooks/useTheme";
 
 interface Tool {
   id: string;
@@ -21,6 +22,7 @@ interface DevToolsProps {
 export const DevTools = ({ tools }: DevToolsProps) => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const { theme, toggleTheme } = useTheme();
 
   // 过滤工具
   const filteredTools = useMemo(() => {
@@ -36,31 +38,59 @@ export const DevTools = ({ tools }: DevToolsProps) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 py-12">
-        {/* 头部区域 */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            开发者工具箱
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            为开发者提供的常用工具集合，提高开发效率
-          </p>
-          
-          {/* 搜索框 */}
-          <div className="max-w-md mx-auto relative">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="搜索工具..."
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
-                       bg-white dark:bg-gray-800 text-gray-900 dark:text-white
-                       focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                       placeholder-gray-500 dark:placeholder-gray-400"
-            />
-            <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 
-                             text-gray-400 dark:text-gray-500 w-5 h-5" />
+      {/* 顶部栏 */}
+      <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/80 backdrop-blur">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              DevTools
+            </h1>
+            <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 rounded-full">
+              Beta
+            </span>
           </div>
+          
+          <div className="flex items-center space-x-4">
+            <a
+              href="https://github.com/funenn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+            >
+              <Github className="w-5 h-5" />
+            </a>
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+              title={theme === 'dark' ? '切换到亮色模式' : '切换到暗色模式'}
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button 
+              className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+              title="设置"
+            >
+              <Settings className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-4 py-12">
+        {/* 搜索框 */}
+        <div className="max-w-md mx-auto relative mb-12">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="搜索工具..."
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
+                     bg-white dark:bg-gray-800 text-gray-900 dark:text-white
+                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                     placeholder-gray-500 dark:placeholder-gray-400"
+          />
+          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 
+                           text-gray-400 dark:text-gray-500 w-5 h-5" />
         </div>
 
         {/* 工具分类区域 */}
