@@ -5,7 +5,6 @@
 [在线体验](https://developer-tools-jet.vercel.app/)
 
 ![工具箱预览](./src/assets/image.png)
-![工具箱移动端预览](./src/assets/image1.png)
 ## 🚀 功能特性
 
 ### AI 助手
