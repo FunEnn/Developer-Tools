@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Upload } from "lucide-react";
+import { ImageDown, ArrowRight, Download, Upload, Settings } from "lucide-react";
 
 export const ImageCompressor = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -45,26 +45,40 @@ export const ImageCompressor = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          上传图片
+      <h3 className="flex items-center gap-2 text-lg font-bold 
+                   bg-gradient-to-r from-emerald-600 to-green-600 
+                   dark:from-emerald-400 dark:to-green-400 
+                   bg-clip-text text-transparent">
+        <ImageDown className="w-6 h-6 text-emerald-500 dark:text-emerald-400" />
+        图片压缩
+      </h3>
+
+      <div className="flex items-center justify-center w-full">
+        <label className="flex flex-col items-center justify-center w-full h-32 
+                       border-2 border-dashed rounded-xl cursor-pointer 
+                       border-emerald-300 dark:border-emerald-600
+                       hover:border-emerald-400 dark:hover:border-emerald-500
+                       hover:bg-emerald-50 dark:hover:bg-emerald-900/20
+                       transition-all duration-200 group">
+          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+            <Upload className="w-8 h-8 mb-4 text-emerald-400 dark:text-emerald-500
+                           group-hover:text-emerald-500 dark:group-hover:text-emerald-400
+                           transition-colors" />
+            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400
+                       group-hover:text-emerald-600 dark:group-hover:text-emerald-300">
+              点击或拖拽上传图片
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              支持 PNG、JPG、WebP 等格式
+            </p>
+          </div>
+          <input
+            type="file"
+            className="hidden"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
         </label>
-        <div className="flex items-center justify-center w-full">
-          <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800">
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <Upload className="w-8 h-8 mb-4 text-gray-500" />
-              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                点击或拖拽上传图片
-              </p>
-            </div>
-            <input
-              type="file"
-              className="hidden"
-              accept="image/*"
-              onChange={handleImageUpload}
-            />
-          </label>
-        </div>
       </div>
 
       {image && (
@@ -73,8 +87,10 @@ export const ImageCompressor = () => {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               预览
             </label>
-            <div className="max-w-full overflow-auto">
-              <img src={image} alt="预览" className="max-h-[400px]" />
+            <div className="max-w-full overflow-auto p-4 rounded-xl
+                        bg-white dark:bg-gray-800 
+                        border border-gray-200 dark:border-gray-700">
+              <img src={image} alt="预览" className="max-h-[400px] mx-auto" />
             </div>
           </div>
 
@@ -88,13 +104,16 @@ export const ImageCompressor = () => {
               max="100"
               value={quality}
               onChange={(e) => setQuality(Number(e.target.value))}
-              className="w-full"
+              className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none 
+                      cursor-pointer accent-emerald-500 dark:accent-emerald-400"
             />
           </div>
 
           <button
             onClick={compressImage}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 via-green-400 to-lime-400 
+                   text-white shadow-sm hover:from-emerald-500 hover:via-green-500 hover:to-lime-500 
+                   transition-colors"
           >
             压缩并下载
           </button>

@@ -59,8 +59,10 @@ export const EmojiPicker = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <div className="flex justify-between items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+      <div className="flex justify-between items-center bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 
+                    dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent 
+                    flex items-center gap-2">
           <Smile className="w-6 h-6" />
           表情工具
         </h2>
@@ -70,15 +72,20 @@ export const EmojiPicker = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="搜索表情..."
-            className="w-64 pl-10 pr-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700 
-              dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-64 pl-10 pr-4 py-2 rounded-xl
+                    border border-gray-200 dark:border-gray-700
+                    bg-white dark:bg-gray-800 
+                    text-gray-900 dark:text-gray-100
+                    focus:ring-2 focus:ring-violet-500 dark:focus:ring-violet-600 
+                    focus:border-transparent transition-all duration-200"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
           {searchTerm && (
             <button
               onClick={() => setSearchTerm("")}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:text-gray-600 
-                dark:hover:text-gray-300"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 
+                      text-gray-400 hover:text-violet-500 dark:hover:text-violet-400 
+                      transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -86,7 +93,7 @@ export const EmojiPicker = () => {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm overflow-x-auto">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm overflow-x-auto">
         <div className="flex gap-2 min-w-max">
           {emojiData.map((category) => (
             <button
@@ -95,11 +102,11 @@ export const EmojiPicker = () => {
                 setSelectedCategory(category.name);
                 setSearchTerm("");
               }}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors
                 ${
                   selectedCategory === category.name
-                    ? "bg-blue-500 text-white"
-                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20"
                 }`}
             >
               {category.name}
@@ -109,9 +116,9 @@ export const EmojiPicker = () => {
       </div>
 
       {recentEmojis.length > 0 && !searchTerm && (
-        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm space-y-3">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm space-y-3">
           <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 flex items-center gap-2">
-            <History className="w-4 h-4" />
+            <History className="w-4 h-4 text-violet-500 dark:text-violet-400" />
             最近使用
           </h3>
           <div className="grid grid-cols-8 sm:grid-cols-12 gap-2">
@@ -119,8 +126,9 @@ export const EmojiPicker = () => {
               <button
                 key={index}
                 onClick={() => handleEmojiClick(emoji)}
-                className="aspect-square flex items-center justify-center text-2xl hover:bg-gray-100 
-                  dark:hover:bg-gray-700 rounded-lg transition-colors"
+                className="aspect-square flex items-center justify-center text-2xl 
+                        hover:bg-violet-50 dark:hover:bg-violet-900/20 
+                        rounded-xl transition-colors"
               >
                 {emoji}
               </button>
@@ -130,9 +138,9 @@ export const EmojiPicker = () => {
       )}
 
       {favoriteEmojis.length > 0 && !searchTerm && (
-        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm space-y-3">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm space-y-3">
           <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 flex items-center gap-2">
-            <Star className="w-4 h-4" />
+            <Star className="w-4 h-4 text-yellow-500" />
             收藏表情
           </h3>
           <div className="grid grid-cols-8 sm:grid-cols-12 gap-2">
@@ -140,8 +148,9 @@ export const EmojiPicker = () => {
               <button
                 key={index}
                 onClick={() => handleEmojiClick(emoji)}
-                className="aspect-square flex items-center justify-center text-2xl hover:bg-gray-100 
-                  dark:hover:bg-gray-700 rounded-lg transition-colors"
+                className="aspect-square flex items-center justify-center text-2xl 
+                        hover:bg-violet-50 dark:hover:bg-violet-900/20 
+                        rounded-xl transition-colors"
               >
                 {emoji}
               </button>
@@ -150,7 +159,7 @@ export const EmojiPicker = () => {
         </div>
       )}
 
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm space-y-3">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm space-y-3">
         <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
           {searchTerm ? "搜索结果" : selectedCategory}
         </h3>
@@ -159,22 +168,24 @@ export const EmojiPicker = () => {
             <div key={index} className="relative group">
               <button
                 onClick={() => handleEmojiClick(emoji.char)}
-                className="w-full aspect-square flex items-center justify-center text-2xl hover:bg-gray-100 
-                  dark:hover:bg-gray-700 rounded-lg transition-colors"
+                className="w-full aspect-square flex items-center justify-center text-2xl 
+                        hover:bg-violet-50 dark:hover:bg-violet-900/20 
+                        rounded-xl transition-colors"
                 title={emoji.description}
               >
                 {emoji.char}
               </button>
               <button
                 onClick={() => toggleFavorite(emoji.char)}
-                className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity 
-                  bg-white dark:bg-gray-800 rounded-full p-1 shadow-sm"
+                className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 
+                        transition-opacity bg-white dark:bg-gray-800 rounded-full 
+                        p-1 shadow-sm hover:shadow-md"
               >
                 <Star
                   className={`w-3 h-3 ${
                     favoriteEmojis.includes(emoji.char)
                       ? "text-yellow-500 fill-yellow-500"
-                      : "text-gray-400"
+                      : "text-gray-400 hover:text-yellow-500"
                   }`}
                 />
               </button>
@@ -184,10 +195,9 @@ export const EmojiPicker = () => {
       </div>
 
       {copiedEmoji && (
-        <div
-          className="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg 
-          shadow-lg flex items-center gap-2 animate-fade-in-up"
-        >
+        <div className="fixed bottom-4 right-4 bg-gradient-to-r from-violet-500 to-indigo-500 
+                     text-white px-4 py-2 rounded-xl shadow-lg flex items-center gap-2 
+                     animate-fade-in-up">
           <Copy className="w-4 h-4" />
           已复制: {copiedEmoji}
         </div>

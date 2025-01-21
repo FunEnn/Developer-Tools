@@ -342,120 +342,133 @@ const ColorPicker: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-          颜色工具
-        </h2>
-        <div className="flex gap-2">
-          {(["picker", "palette", "gradient"] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-md ${
-                activeTab === tab
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
-              }`}
-            >
-              {tab === "picker"
-                ? "选色器"
-                : tab === "palette"
-                  ? "调色板"
-                  : "渐变色"}
-            </button>
-          ))}
-        </div>
+      {/* 顶部标签栏 */}
+      <div className="flex gap-2 p-1 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+        <button
+          onClick={() => setActiveTab("picker")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
+            ${
+              activeTab === "picker"
+                ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white"
+                : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20"
+            }`}
+        >
+          <Droplet className="w-4 h-4" />
+          颜色选择
+        </button>
+        <button
+          onClick={() => setActiveTab("palette")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
+            ${
+              activeTab === "palette"
+                ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white"
+                : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20"
+            }`}
+        >
+          <Palette className="w-4 h-4" />
+          调色板
+        </button>
+        <button
+          onClick={() => setActiveTab("gradient")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
+            ${
+              activeTab === "gradient"
+                ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white"
+                : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20"
+            }`}
+        >
+          <Shuffle className="w-4 h-4" />
+          渐变色
+        </button>
       </div>
 
+      {/* 颜色选择器页面 */}
       {activeTab === "picker" && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <HexColorPicker color={color} onChange={setColor} />
-            <div className="flex items-center gap-4">
-              <HexColorInput
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+              <HexColorPicker
                 color={color}
                 onChange={setColor}
-                prefixed
-                className="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700"
+                className="w-full !h-48"
               />
-              <button
-                onClick={handleColorPick}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
-                title="拾取颜色"
-              >
-                <Pipette className="w-5 h-5" />
-              </button>
-              <button
-                onClick={generateRandomColor}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
-                title="随机颜色"
-              >
-                <Shuffle className="w-5 h-5" />
-              </button>
-              <button
-                onClick={saveColor}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
-                title="保存颜色"
-              >
-                <Droplet className="w-5 h-5" />
-              </button>
             </div>
-
-            <div className="space-y-2">
-              {[
-                { label: "RGB", value: getRgb() },
-                { label: "HSL", value: getHsl() },
-                { label: "HEX", value: color.toUpperCase() },
-              ].map(({ label, value }) => (
-                <div key={label} className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500">{label}</span>
-                  <button
-                    onClick={() => copyToClipboard(value)}
-                    className="text-sm text-blue-500 hover:text-blue-600"
-                  >
-                    {value}
-                  </button>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm space-y-4">
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-12 h-12 rounded-xl shadow-inner"
+                  style={{ backgroundColor: color }}
+                />
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
+                    十六进制
+                  </label>
+                  <div className="relative">
+                    <HexColorInput
+                      color={color}
+                      onChange={setColor}
+                      prefixed
+                      className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 
+                               border border-gray-200 dark:border-gray-600 rounded-lg 
+                               text-gray-900 dark:text-gray-100"
+                    />
+                    <button
+                      onClick={() => copyToClipboard(color)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 
+                               hover:bg-violet-50 dark:hover:bg-violet-900/20 rounded-md 
+                               transition-colors"
+                    >
+                      <Copy className="w-4 h-4 text-gray-400 hover:text-violet-500 dark:hover:text-violet-400" />
+                    </button>
+                  </div>
                 </div>
-              ))}
+              </div>
+              <div className="space-y-2">
+                {[
+                  { label: "RGB", value: getRgb() },
+                  { label: "HSL", value: getHsl() },
+                  { label: "HEX", value: color.toUpperCase() },
+                ].map(({ label, value }) => (
+                  <div key={label} className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500">{label}</span>
+                    <button
+                      onClick={() => copyToClipboard(value)}
+                      className="text-sm text-blue-500 hover:text-blue-600"
+                    >
+                      {value}
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-medium text-gray-900 dark:text-gray-100">
-              保存的颜色
-            </h3>
-            <div className="grid grid-cols-5 gap-2">
-              {savedColors.map((savedColor, index) => (
-                <button
-                  key={index}
-                  onClick={() => setColor(savedColor)}
-                  className="w-full aspect-square rounded-md"
-                  style={{ backgroundColor: savedColor }}
-                  title={savedColor}
-                />
-              ))}
-            </div>
-
-            <h3 className="font-medium text-gray-900 dark:text-gray-100 mt-6">
-              配色方案
-            </h3>
-            <div className="space-y-4">
-              {colorSchemes.map((scheme) => (
-                <div key={scheme.name} className="space-y-2">
-                  <h4 className="text-sm text-gray-500">{scheme.name}</h4>
-                  <div className="grid grid-cols-5 gap-2">
-                    {scheme.colors.map((schemeColor, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setColor(schemeColor)}
-                        className="w-full aspect-square rounded-md"
-                        style={{ backgroundColor: schemeColor }}
-                        title={schemeColor}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
+            <div
+              className="aspect-square rounded-xl shadow-lg"
+              style={{ backgroundColor: color }}
+            />
+            <div className="flex gap-2">
+              <button
+                onClick={() => copyToClipboard(color)}
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 
+                         bg-gradient-to-r from-violet-400 to-indigo-400 
+                         hover:from-violet-500 hover:to-indigo-500
+                         text-white rounded-xl shadow-sm transition-colors"
+              >
+                <Copy className="w-4 h-4" />
+                复制颜色
+              </button>
+              <button
+                onClick={handleColorPick}
+                className="flex items-center justify-center gap-2 px-4 py-2
+                         bg-gradient-to-r from-emerald-400 to-green-400
+                         hover:from-emerald-500 hover:to-green-500
+                         text-white rounded-xl shadow-sm transition-colors"
+              >
+                <Pipette className="w-4 h-4" />
+                屏幕取色
+              </button>
             </div>
           </div>
         </div>

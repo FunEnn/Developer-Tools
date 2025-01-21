@@ -33,33 +33,9 @@ export const DevTools = ({ tools }: DevToolsProps) => {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar
-        tools={filteredTools}
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        theme={theme}
-        toggleTheme={toggleTheme}
-        isSidebarOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-      />
 
       {/* 主内容区 */}
       <main className="flex-1 bg-gray-50 dark:bg-gray-900 w-full">
-        {/* 移动端顶部导航栏 */}
-        <div className="lg:hidden sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-          <div className="flex items-center justify-between px-4 h-16">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">
-              DevTools
-            </h1>
-            <button
-              onClick={toggleSidebar}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              <Menu className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-            </button>
-          </div>
-        </div>
-
         {/* 主要内容 */}
         <div className="container mx-auto px-3 lg:px-4 py-4 lg:py-6">
           {/* 欢迎区域 */}
@@ -107,43 +83,7 @@ export const DevTools = ({ tools }: DevToolsProps) => {
                     GitHub
                   </span>
                 </a>
-                <button
-                  onClick={toggleTheme}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg 
-                           bg-white dark:bg-gray-800 
-                           border border-gray-200 dark:border-gray-700
-                           hover:border-pink-200 dark:hover:border-pink-700
-                           group transition-all duration-200"
-                  title={theme === "dark" ? "切换到亮色模式" : "切换到暗色模式"}
-                >
-                  {theme === "dark" ? (
-                    <>
-                      <Sun
-                        className="w-5 h-5 text-gray-600 dark:text-gray-400 
-                                   group-hover:text-pink-500 dark:group-hover:text-pink-400"
-                      />
-                      <span
-                        className="text-sm text-gray-600 dark:text-gray-400
-                                    group-hover:text-pink-500 dark:group-hover:text-pink-400"
-                      >
-                        亮色模式
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <Moon
-                        className="w-5 h-5 text-gray-600 dark:text-gray-400 
-                                    group-hover:text-pink-500 dark:group-hover:text-pink-400"
-                      />
-                      <span
-                        className="text-sm text-gray-600 dark:text-gray-400
-                                    group-hover:text-pink-500 dark:group-hover:text-pink-400"
-                      >
-                        暗色模式
-                      </span>
-                    </>
-                  )}
-                </button>
+
               </div>
             </div>
           </div>

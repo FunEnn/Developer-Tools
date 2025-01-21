@@ -67,18 +67,22 @@ export const JsonEditor = () => {
                   className="hidden"
                 />
                 <div
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                  className="p-2 hover:bg-violet-50 dark:hover:bg-violet-900/20 rounded-md 
+                             transition-colors group"
                   title="上传JSON文件"
                 >
-                  <Upload className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                  <Upload className="w-5 h-5 text-gray-600 dark:text-gray-400 
+                                    group-hover:text-violet-500 dark:group-hover:text-violet-400" />
                 </div>
               </label>
               <button
                 onClick={() => copyToClipboard(input)}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                className="p-2 hover:bg-violet-50 dark:hover:bg-violet-900/20 rounded-md 
+                           transition-colors group"
                 title="复制内容"
               >
-                <Copy className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                <Copy className="w-5 h-5 text-gray-600 dark:text-gray-400 
+                                  group-hover:text-violet-500 dark:group-hover:text-violet-400" />
               </button>
             </div>
           </div>
@@ -108,19 +112,23 @@ export const JsonEditor = () => {
             <div className="flex gap-2">
               <button
                 onClick={() => copyToClipboard(formatted)}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                className="p-2 hover:bg-violet-50 dark:hover:bg-violet-900/20 rounded-md 
+                           transition-colors group"
                 title="复制内容"
                 disabled={!formatted}
               >
-                <Copy className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                <Copy className="w-5 h-5 text-gray-600 dark:text-gray-400 
+                                  group-hover:text-violet-500 dark:group-hover:text-violet-400" />
               </button>
               <button
                 onClick={downloadJson}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                className="p-2 hover:bg-violet-50 dark:hover:bg-violet-900/20 rounded-md 
+                           transition-colors group"
                 title="下载JSON"
                 disabled={!formatted}
               >
-                <Download className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                <Download className="w-5 h-5 text-gray-600 dark:text-gray-400 
+                                    group-hover:text-violet-500 dark:group-hover:text-violet-400" />
               </button>
             </div>
           </div>
@@ -152,7 +160,9 @@ export const JsonEditor = () => {
       <div className="flex gap-2">
         <button
           onClick={formatJson}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+          className="px-4 py-2 rounded-xl bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 
+                     text-white shadow-sm hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 
+                     transition-colors"
         >
           格式化
         </button>
@@ -162,7 +172,9 @@ export const JsonEditor = () => {
             setFormatted("");
             setError(null);
           }}
-          className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+          className="px-4 py-2 rounded-xl bg-gradient-to-r from-gray-400 to-gray-500
+                     text-white shadow-sm hover:from-gray-500 hover:to-gray-600 
+                     transition-colors"
         >
           清空
         </button>

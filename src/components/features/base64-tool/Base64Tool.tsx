@@ -62,10 +62,10 @@ export const Base64Tool = () => {
             <button
               key={m.value}
               onClick={() => setMode(m.value as ConvertMode)}
-              className={`px-4 py-2 rounded-md transition-colors ${
-                mode === m.value
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+              className={`px-4 py-2 rounded-xl transition-all duration-200 shadow-sm
+                ${mode === m.value
+                  ? "bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 text-white hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500"
+                  : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
               }`}
             >
               {m.label}
@@ -76,21 +76,21 @@ export const Base64Tool = () => {
         <div className="flex gap-2">
           <button
             onClick={() => setDirection("encode")}
-            className={`flex-1 py-2 rounded-md transition-colors ${
-              direction === "encode"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-            }`}
+            className={`flex-1 py-2.5 rounded-xl transition-all duration-200 shadow-sm
+              ${direction === "encode"
+                ? "bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 text-white hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500"
+                : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+              }`}
           >
             编码
           </button>
           <button
             onClick={() => setDirection("decode")}
-            className={`flex-1 py-2 rounded-md transition-colors ${
-              direction === "decode"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-            }`}
+            className={`flex-1 py-2.5 rounded-xl transition-all duration-200 shadow-sm
+              ${direction === "decode"
+                ? "bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 text-white hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500"
+                : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+              }`}
           >
             解码
           </button>
@@ -106,7 +106,13 @@ export const Base64Tool = () => {
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="w-full h-40 p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
+            className="w-full h-40 p-3 rounded-xl
+                     border border-gray-200 dark:border-gray-700
+                     bg-white dark:bg-gray-800
+                     text-gray-900 dark:text-gray-100
+                     placeholder-gray-400 dark:placeholder-gray-500
+                     focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent
+                     shadow-sm transition-all duration-200"
             placeholder={`请输入要${direction === "encode" ? "编码" : "解码"}的内容`}
           />
         </div>
@@ -117,14 +123,18 @@ export const Base64Tool = () => {
           <textarea
             value={output}
             readOnly
-            className="w-full h-40 p-2 border rounded-md bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
+            className="w-full h-40 p-3 rounded-xl
+                     border border-gray-200 dark:border-gray-700
+                     bg-gray-50 dark:bg-gray-800
+                     text-gray-900 dark:text-gray-100
+                     shadow-sm"
           />
         </div>
       </div>
 
       {/* 错误提示 */}
       {error && (
-        <div className="p-3 bg-red-100 text-red-700 rounded-md dark:bg-red-900/30 dark:text-red-400">
+        <div className="p-3 rounded-xl bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400 text-sm">
           {error}
         </div>
       )}
@@ -133,7 +143,10 @@ export const Base64Tool = () => {
       <div className="flex flex-wrap gap-2">
         <button
           onClick={handleConvert}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 
+                   text-white shadow-sm
+                   hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500
+                   transition-all duration-200"
         >
           转换
         </button>
@@ -143,7 +156,8 @@ export const Base64Tool = () => {
             setOutput("");
             setError(null);
           }}
-          className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+          className="px-4 py-2.5 rounded-xl bg-gray-500 text-white shadow-sm
+                   hover:bg-gray-600 transition-all duration-200"
         >
           清空
         </button>
@@ -151,7 +165,10 @@ export const Base64Tool = () => {
           onClick={async () => {
             await navigator.clipboard.writeText(output);
           }}
-          className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400
+                   text-white shadow-sm
+                   hover:from-blue-500 hover:via-cyan-500 hover:to-teal-500
+                   transition-all duration-200"
         >
           复制结果
         </button>

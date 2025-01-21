@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CryptoJS from "crypto-js";
 
 const hashTypes = [
@@ -43,20 +43,24 @@ export const HashTool = () => {
   return (
     <div className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
           选择哈希算法
         </label>
-        <select
-          value={selectedHash}
-          onChange={(e) => setSelectedHash(e.target.value)}
-          className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
-        >
+        <div className="flex flex-wrap gap-2">
           {hashTypes.map((type) => (
-            <option key={type.value} value={type.value}>
+            <button
+              key={type.value}
+              onClick={() => setSelectedHash(type.value)}
+              className={`px-4 py-2 rounded-xl transition-all duration-200 shadow-sm
+                ${selectedHash === type.value
+                  ? "bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 text-white hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500"
+                  : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+                }`}
+            >
               {type.label}
-            </option>
+            </button>
           ))}
-        </select>
+        </div>
       </div>
 
       <div>
@@ -66,26 +70,60 @@ export const HashTool = () => {
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="w-full h-32 p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
+          className="w-full h-32 p-3 rounded-xl
+                   border border-gray-200 dark:border-gray-700
+                   bg-white dark:bg-gray-800
+                   text-gray-900 dark:text-gray-100
+                   placeholder-gray-400 dark:placeholder-gray-500
+                   focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent
+                   shadow-sm transition-all duration-200"
           placeholder="输入要计算哈希值的文本..."
         />
       </div>
 
-      <button
-        onClick={calculateHash}
-        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-      >
-        计算哈希
-      </button>
+      <div className="flex gap-2">
+        <button
+          onClick={calculateHash}
+          className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 
+                   text-white shadow-sm
+                   hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500
+                   transition-all duration-200"
+        >
+          计算哈希
+        </button>
+        <button
+          onClick={async () => {
+            if (hash) {
+              await navigator.clipboard.writeText(hash.toString());
+            }
+          }}
+          disabled={!hash}
+          className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400
+                   text-white shadow-sm
+                   hover:from-blue-500 hover:via-cyan-500 hover:to-teal-500
+                   disabled:opacity-50 disabled:cursor-not-allowed
+                   transition-all duration-200"
+        >
+          复制结果
+        </button>
+      </div>
 
       {hash && (
-        <div className="mt-4">
-          <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100">
+        <div className="mt-4 space-y-2">
+          <h3 className="text-lg font-medium bg-gradient-to-r from-violet-400 to-blue-400 
+                        bg-clip-text text-transparent">
             {hashTypes.find((t) => t.value === selectedHash)?.label} 哈希值
           </h3>
-          <pre className="p-3 bg-gray-50 rounded-md dark:bg-gray-700/50 overflow-auto break-all">
-            {hash}
-          </pre>
+          <div className="p-4 rounded-xl bg-gradient-to-br from-white to-gray-50 
+                        dark:from-gray-800 dark:to-gray-900
+                        border border-gray-200/50 dark:border-gray-700/50
+                        shadow-sm backdrop-blur-sm
+                        hover:shadow-md hover:border-blue-200/50 dark:hover:border-blue-700/50
+                        transition-all duration-200">
+            <pre className="overflow-auto break-all text-sm text-gray-800 dark:text-gray-200">
+              {hash}
+            </pre>
+          </div>
         </div>
       )}
     </div>
