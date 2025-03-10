@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Search, Sun, Moon, ChevronRight } from "lucide-react";
 import type { Category } from "../types";
 
@@ -23,6 +23,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   toggleSidebar,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <>
@@ -141,6 +142,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div className="space-y-1">
                 {category.items.map((tool) => {
                   const Icon = tool.icon;
+                  const isActive = location.pathname === `/tools/${tool.id}`;
                   return (
                     <button
                       key={tool.id}
@@ -148,17 +150,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         navigate(`/tools/${tool.id}`);
                         if (window.innerWidth < 1024) toggleSidebar();
                       }}
-                      className="w-full flex items-center px-3 py-2 rounded-lg
-                        text-gray-700 dark:text-gray-300
-                        hover:bg-violet-50 dark:hover:bg-violet-900/20
-                        hover:text-violet-600 dark:hover:text-violet-400
-                        transition-all duration-200 group"
+                      className={`w-full flex items-center px-3 py-2 rounded-lg
+                        transition-all duration-200 group
+                        ${
+                          isActive
+                            ? "bg-violet-50 dark:bg-violet-900/20 text-violet-600 dark:text-violet-400"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20 hover:text-violet-600 dark:hover:text-violet-400"
+                        }`}
                     >
-                      <Icon className="w-5 h-5 mr-3 text-gray-400 group-hover:text-violet-500 dark:group-hover:text-violet-400" />
+                      <Icon className={`w-5 h-5 mr-3 ${
+                        isActive
+                          ? "text-violet-500 dark:text-violet-400"
+                          : "text-gray-400 group-hover:text-violet-500 dark:group-hover:text-violet-400"
+                      }`} />
                       <span className="text-sm font-medium flex-1 text-left">
                         {tool.label}
                       </span>
-                      <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" />
+                      <ChevronRight className={`w-4 h-4 transition-all duration-200 ${
+                        isActive
+                          ? "opacity-100 translate-x-1"
+                          : "opacity-0 group-hover:opacity-100 group-hover:translate-x-1"
+                      }`} />
                     </button>
                   );
                 })}
