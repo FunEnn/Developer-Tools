@@ -198,17 +198,8 @@ app.post(
 // 导出处理函数
 export default app;
 
-// 仅在开发环境启动服务器
-if (process.env.NODE_ENV === "development") {
-  const PORT = process.env.PORT || 3001;
-  console.log('Starting development server...');
-  console.log('Environment:', process.env.NODE_ENV);
-  console.log('Port:', PORT);
-  
-  app.listen(PORT, () => {
-    console.log(`Development server running on port ${PORT}`);
-    console.log(`Server URL: http://localhost:${PORT}`);
-  }).on('error', (err) => {
-    console.error('Server error:', err);
-  });
-}
+// 启动服务器
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
