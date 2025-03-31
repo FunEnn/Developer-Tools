@@ -50,17 +50,22 @@ export default function PixivPage() {
     try {
       setLoading(true);
       setError(null);
+      const response = await axios.post<PixivResponse>("/api/pixiv", settings);
       
-      // 将标签数组转换为二维数组格式
-      const requestData = {
-        ...settings,
-        tag: settings.tag.map(tag => tag.split('|'))
-      };
-      
-      const response = await axios.post<PixivResponse>('/api/pixiv', requestData);
+      if (response.data.error) {
+        throw new Error(response.data.error);
+      }
+
       setImages(response.data.data);
+      // 初始化新图片的加载状态
+      const newLoadingState: ImageLoadingState = {};
+      response.data.data.forEach(image => {
+        newLoadingState[`${image.pid}-${image.p}`] = true;
+      });
+      setImageLoading(newLoadingState);
     } catch (err: any) {
-      setError(err.response?.data?.error || '获取图片失败');
+      console.error("获取图片失败:", err);
+      setError(err.response?.data?.details || err.message || "获取图片失败，请稍后重试");
     } finally {
       setLoading(false);
     }
