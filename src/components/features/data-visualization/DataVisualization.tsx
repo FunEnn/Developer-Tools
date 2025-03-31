@@ -165,10 +165,8 @@ export default function DataVisualization() {
           data={data}
         >
           <RadialBar
-            minAngle={15}
             label={{ position: 'insideStart', fill: '#fff' }}
             background
-            clockWise
             dataKey="value"
           >
             {data.map((entry, index) => (
