@@ -3,6 +3,7 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
 import axios from "axios";
+import pixivRouter from "./pixiv";
 
 // 定义类型
 type PromptTemplate = "social" | "ad" | "article" | "slogan";
@@ -52,6 +53,9 @@ app.use(
   })
 );
 app.use(express.json());
+
+// 使用 Pixiv 路由
+app.use("/api/pixiv", pixivRouter);
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
@@ -197,7 +201,14 @@ export default app;
 // 仅在开发环境启动服务器
 if (process.env.NODE_ENV === "development") {
   const PORT = process.env.PORT || 3001;
+  console.log('Starting development server...');
+  console.log('Environment:', process.env.NODE_ENV);
+  console.log('Port:', PORT);
+  
   app.listen(PORT, () => {
     console.log(`Development server running on port ${PORT}`);
+    console.log(`Server URL: http://localhost:${PORT}`);
+  }).on('error', (err) => {
+    console.error('Server error:', err);
   });
 }

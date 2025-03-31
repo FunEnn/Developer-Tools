@@ -4,6 +4,7 @@ import { DevTools } from "@/pages/DevTools";
 import { ErrorPage } from "@/pages/ErrorPage";
 import { ToolLayout } from "@/components/layout/ToolLayout";
 import { Skeleton } from '@/components/ui/Skeleton';
+import PixivPage from "@/pages/PixivPage";
 
 export const JsonEditor = React.lazy(
   () => import("../components/features/json-editor/JsonEditor")
@@ -197,6 +198,13 @@ export const tools = [
   {
     category: "图像工具",
     items: [
+      {
+        id: "pixiv",
+        label: "Pixiv图片",
+        icon: Image,
+        component: PixivPage,
+        description: "随机获取 Pixiv 图片，支持多种筛选条件",
+      },
       {
         id: "image-convert",
         label: "图片转换",
