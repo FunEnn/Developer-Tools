@@ -45,6 +45,7 @@ export default function PixivPage() {
     tag: [] as string[],
     keyword: '',
   });
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const fetchImages = async () => {
     try {
@@ -117,17 +118,8 @@ export default function PixivPage() {
     setImageError(prev => ({ ...prev, [imageId]: true }));
   };
 
-  const handleDownload = async (image: PixivImage) => {
-    try {
-      const link = document.createElement('a');
-      link.href = image.urls[settings.size[0]];
-      link.download = `${image.title}_${image.author}_${image.pid}.${image.ext}`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (err) {
-      setError('下载失败，请稍后重试');
-    }
+  const handleDownload = (image: PixivImage) => {
+    setPreviewImage(image.urls[settings.size[0]]);
   };
 
   return (
@@ -408,6 +400,20 @@ export default function PixivPage() {
             );
           })}
         </div>
+
+        {previewImage && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="relative bg-white p-4 rounded-lg">
+              <img src={previewImage} alt="Preview" className="max-w-[60vw] max-h-[90vh]" />
+              <button
+                onClick={() => setPreviewImage(null)}
+                className="absolute top-2 right-2 text-red-600 bg-gray-200 hover:bg-gray-300 rounded-full p-2 transition duration-200"
+              >
+                关闭
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
