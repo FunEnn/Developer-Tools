@@ -44,6 +44,7 @@ export default function PixivPage() {
     excludeAI: false,
     tag: [] as string[],
     keyword: '',
+    uid: null as number | null,
   });
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
@@ -51,6 +52,7 @@ export default function PixivPage() {
     try {
       setLoading(true);
       setError(null);
+      
       const response = await axios.post<PixivResponse>("/api/pixiv", settings);
       
       if (response.data.error) {
@@ -122,6 +124,20 @@ export default function PixivPage() {
     setPreviewImage(image.urls[settings.size[0]]);
   };
 
+  const handleAuthorClick = (uid: number) => {
+    setSettings(prev => ({
+      ...prev,
+      uid: uid
+    }));
+  };
+
+  const removeUid = () => {
+    setSettings(prev => ({
+      ...prev,
+      uid: null
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 py-8">
@@ -148,7 +164,6 @@ export default function PixivPage() {
             <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
               随机 Pixiv 图片
             </h1>
-            <p className="mt-2 text-sm text-gray-500">支持多种筛选条件，轻松找到心仪的图片</p>
           </div>
           <button
             onClick={fetchImages}
@@ -236,6 +251,29 @@ export default function PixivPage() {
                 <label htmlFor="excludeAI" className="ml-3 block text-sm text-gray-700">
                   排除 AI 作品
                 </label>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  作者 ID (uid)
+                </label>
+                <input
+                  type="text"
+                  placeholder="输入作者 ID"
+                  className="w-full h-11 px-4 rounded-lg border border-gray-200 bg-white text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm hover:border-gray-300"
+                  value={settings.uid || ''}
+                  onChange={(e) => {
+                    const uidString = e.target.value.trim();
+                    if (uidString === '') {
+                      setSettings(prev => ({ ...prev, uid: null }));
+                    } else {
+                      const uid = parseInt(uidString);
+                      if (!isNaN(uid)) {
+                        setSettings(prev => ({ ...prev, uid: uid }));
+                      }
+                    }
+                  }}
+                />
               </div>
             </div>
 
@@ -384,7 +422,15 @@ export default function PixivPage() {
                 </div>
                 <div className="p-5">
                   <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-gray-900">{image.title}</h3>
-                  <p className="text-sm text-gray-600 mb-3">作者：{image.author}</p>
+                  <p className="text-sm text-gray-600 mb-3">
+                    作者：
+                    <button 
+                      onClick={() => handleAuthorClick(image.uid)}
+                      className="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
+                    >
+                      {image.author}
+                    </button>
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {image.tags.slice(0, 3).map((tag) => (
                       <span
@@ -402,14 +448,15 @@ export default function PixivPage() {
         </div>
 
         {previewImage && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-white p-4 rounded-lg">
-              <img src={previewImage} alt="Preview" className="max-w-[60vw] max-h-[90vh]" />
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="relative bg-white p-4 rounded-lg shadow-2xl max-w-[90vw] max-h-[90vh] overflow-auto">
+              <img src={previewImage} alt="Preview" className="max-w-full max-h-[80vh] object-contain" />
               <button
                 onClick={() => setPreviewImage(null)}
-                className="absolute top-2 right-2 text-red-600 bg-gray-200 hover:bg-gray-300 rounded-full p-2 transition duration-200"
+                className="absolute top-2 right-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full p-2 shadow-md transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="关闭预览"
               >
-                关闭
+                <X className="w-5 h-5" />
               </button>
             </div>
           </div>

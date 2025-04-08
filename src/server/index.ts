@@ -3,7 +3,6 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
 import axios from "axios";
-import pixivRouter from "./pixiv";
 
 // 定义类型
 type PromptTemplate = "social" | "ad" | "article" | "slogan";
@@ -36,21 +35,57 @@ interface TextRequest {
   keywords: string;
 }
 
+interface PixivRequest {
+  r18?: number;
+  num?: number;
+  uid?: number[];
+  keyword?: string;
+  tag?: string[];
+  size?: string[];
+  proxy?: string;
+  dateAfter?: number;
+  dateBefore?: number;
+  dsc?: boolean;
+  excludeAI?: boolean;
+  aspectRatio?: string;
+}
+
+interface PixivResponse {
+  error: string;
+  data: {
+    pid: number;
+    p: number;
+    uid: number;
+    title: string;
+    author: string;
+    r18: boolean;
+    width: number;
+    height: number;
+    tags: string[];
+    ext: string;
+    aiType: number;
+    uploadDate: number;
+    urls: Record<string, string>;
+  }[];
+}
+
 dotenv.config();
 
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3001"],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    origin: [
+      'https://developer-tools-jet.vercel.app', 
+      'http://localhost:5173',
+      'https://developer-tools-git-main-luomacode.vercel.app',
+      /\.vercel\.app$/
+    ],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
   })
 );
 app.use(express.json());
-
-// 添加 Pixiv 路由
-app.use("/api/pixiv", pixivRouter);
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
@@ -61,6 +96,42 @@ const openai = new OpenAI({
 // 健康检查接口
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", env: process.env.NODE_ENV });
+});
+
+// Pixiv 图片接口
+app.post("/api/pixiv", async (req, res) => {
+  try {
+    const response = await axios.post<PixivResponse>(
+      "https://api.lolicon.app/setu/v2",
+      req.body,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 10000,
+      }
+    );
+
+    console.log('Pixiv API response:', response.data);
+
+    if (response.data.error) {
+      throw new Error(response.data.error);
+    }
+
+    res.json(response.data);
+  } catch (error: any) {
+    console.error("Pixiv API error:", {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+      config: error.config
+    });
+    
+    res.status(error.response?.status || 500).json({
+      error: "获取 Pixiv 图片失败",
+      details: error.response?.data?.error || error.message,
+    });
+  }
 });
 
 // AI 聊天接口
