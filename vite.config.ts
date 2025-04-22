@@ -26,7 +26,7 @@ export default defineConfig({
     port: 4173,
     host: true,
   },
-  base: "./",
+  base: "/",
   build: {
     cssCodeSplit: true,
     cssMinify: true,
