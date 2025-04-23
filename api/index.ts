@@ -3,71 +3,19 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
 import axios from "axios";
-
-// 定义类型
-type PromptTemplate = "social" | "ad" | "article" | "slogan";
-
-// 添加 RichTextChild 类型定义
-interface RichTextChild {
-  text?: string;
-  children?: RichTextChild[];
-  [key: string]: any;
-}
-
-interface TypedRequestBody<T> extends express.Request {
-  body: T;
-}
-
-interface ChatRequest {
-  message: string;
-}
-
-interface ImageRequest {
-  prompt: string;
-}
-
-interface CodeRequest {
-  prompt: string;
-}
-
-interface TextRequest {
-  template: PromptTemplate;
-  keywords: string;
-}
-
-interface PixivRequest {
-  r18?: number;
-  num?: number;
-  uid?: number[];
-  keyword?: string;
-  tag?: string[];
-  size?: string[];
-  proxy?: string;
-  dateAfter?: number;
-  dateBefore?: number;
-  dsc?: boolean;
-  excludeAI?: boolean;
-  aspectRatio?: string;
-}
-
-interface PixivResponse {
-  error: string;
-  data: {
-    pid: number;
-    p: number;
-    uid: number;
-    title: string;
-    author: string;
-    r18: boolean;
-    width: number;
-    height: number;
-    tags: string[];
-    ext: string;
-    aiType: number;
-    uploadDate: number;
-    urls: Record<string, string>;
-  }[];
-}
+import CryptoJS from 'crypto-js';
+import {
+  PromptTemplate,
+  RichTextChild,
+  ChatRequest,
+  ImageRequest,
+  CodeRequest,
+  TextRequest,
+  TranslateRequest,
+  PixivRequest,
+  PixivResponse,
+  TypedRequestBody
+} from "./types";
 
 dotenv.config();
 
@@ -92,6 +40,10 @@ const openai = new OpenAI({
   baseURL: "http://api.aihao123.cn/luomacode-api/open-api/",
   timeout: 10000,
 });
+
+// 腾讯云翻译API密钥
+const TENCENT_SECRET_ID = process.env.TENCENT_SECRET_ID;
+const TENCENT_SECRET_KEY = process.env.TENCENT_SECRET_KEY;
 
 // 健康检查接口
 app.get("/api/health", (_req, res) => {
@@ -257,6 +209,102 @@ app.post(
     } catch (error) {
       console.error("Text generation error:", error);
       res.status(500).json({ error: "文案生成出错" });
+    }
+  }
+);
+
+// 腾讯云翻译接口
+app.post(
+  "/api/translate",
+  async (req: TypedRequestBody<TranslateRequest>, res: express.Response) => {
+    try {
+      const { text, sourceLanguage, targetLanguage } = req.body;
+      
+      // 计算签名
+      const endpoint = "tmt.tencentcloudapi.com";
+      const region = "ap-guangzhou";
+      const action = "TextTranslate";
+      const version = "2018-03-21";
+      const timestamp = Math.round(new Date().getTime() / 1000);
+      const date = new Date(timestamp * 1000).toISOString().split('T')[0];
+      
+      // 请求数据
+      const payload = {
+        SourceText: text,
+        Source: sourceLanguage,
+        Target: targetLanguage,
+        ProjectId: 0
+      };
+      
+      // 准备签名
+      const service = "tmt";
+      const algorithm = "TC3-HMAC-SHA256";
+      const payloadJson = JSON.stringify(payload);
+      const hashedRequestPayload = CryptoJS.SHA256(payloadJson).toString(CryptoJS.enc.Hex);
+      
+      // 规范请求串
+      const httpRequestMethod = "POST";
+      const canonicalUri = "/";
+      const canonicalQueryString = "";
+      const canonicalHeaders = "content-type:application/json\n" + `host:${endpoint}\n`;
+      const signedHeaders = "content-type;host";
+      const canonicalRequest = httpRequestMethod + "\n" +
+                               canonicalUri + "\n" +
+                               canonicalQueryString + "\n" +
+                               canonicalHeaders + "\n" +
+                               signedHeaders + "\n" +
+                               hashedRequestPayload;
+      
+      // 步骤2：拼接待签名字符串
+      const credentialScope = date + "/" + service + "/" + "tc3_request";
+      const hashedCanonicalRequest = CryptoJS.SHA256(canonicalRequest).toString(CryptoJS.enc.Hex);
+      const stringToSign = algorithm + "\n" +
+                          timestamp + "\n" +
+                          credentialScope + "\n" +
+                          hashedCanonicalRequest;
+      
+      // 步骤3：计算签名
+      const secretDate = CryptoJS.HmacSHA256(date, "TC3" + TENCENT_SECRET_KEY);
+      const secretService = CryptoJS.HmacSHA256(service, secretDate);
+      const secretSigning = CryptoJS.HmacSHA256("tc3_request", secretService);
+      const signature = CryptoJS.HmacSHA256(stringToSign, secretSigning).toString(CryptoJS.enc.Hex);
+      
+      // 步骤4：拼接Authorization
+      const authorization = algorithm + " " +
+                           "Credential=" + TENCENT_SECRET_ID + "/" + credentialScope + ", " +
+                           "SignedHeaders=" + signedHeaders + ", " +
+                           "Signature=" + signature;
+      
+      // 发送请求
+      const response = await axios.post(
+        `https://${endpoint}`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": authorization,
+            "Host": endpoint,
+            "X-TC-Action": action,
+            "X-TC-Region": region,
+            "X-TC-Timestamp": timestamp.toString(),
+            "X-TC-Version": version
+          }
+        }
+      );
+
+      if (response.data.Response.Error) {
+        throw new Error(response.data.Response.Error.Message);
+      }
+
+      res.json({ 
+        translatedText: response.data.Response.TargetText 
+      });
+    } catch (error: any) {
+      console.error("Translation error:", error.response?.data || error.message);
+      res.status(500).json({
+        error: "翻译服务出错",
+        details: error.response?.data?.Response?.Error?.Message || error.message,
+      });
     }
   }
 );
