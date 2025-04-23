@@ -6,7 +6,7 @@ import { ToolLayout } from "@/components/layout/ToolLayout";
 import { Skeleton } from '@/components/ui/Skeleton';
 
 export const PixivPage  = React.lazy(
-  () => import("@/components/features/pixiv-image/PixivPage")
+  () => import("../components/features/pixiv-image/PixivPage")
 );
 export const JsonEditor = React.lazy(
   () => import("../components/features/json-editor/JsonEditor")
