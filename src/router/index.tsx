@@ -4,10 +4,8 @@ import { DevTools } from "@/pages/DevTools";
 import { ErrorPage } from "@/pages/ErrorPage";
 import { ToolLayout } from "@/components/layout/ToolLayout";
 import { Skeleton } from '@/components/ui/Skeleton';
+import PixivPage from "@/pages/PixivPage";
 
-export const PixivPage  = React.lazy(
-  () => import("../components/features/pixiv-image/PixivPage")
-);
 export const JsonEditor = React.lazy(
   () => import("../components/features/json-editor/JsonEditor")
 );
