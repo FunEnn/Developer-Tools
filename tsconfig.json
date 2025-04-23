@@ -18,8 +18,9 @@
         "paths": {
             "@/*": ["src/*"]
         },
-        "types": ["vite/client"]
+        "types": ["vite/client"],
+        "esModuleInterop": true
     },
-    "include": ["src"],
+    "include": ["src", "api"],
     "exclude": ["node_modules"]
 }

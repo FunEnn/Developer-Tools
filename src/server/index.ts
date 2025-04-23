@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
 import axios from "axios";
 import CryptoJS from 'crypto-js';
+
 // 定义类型
 export type PromptTemplate = "social" | "ad" | "article" | "slogan";
 
@@ -73,7 +74,7 @@ export interface PixivResponse {
     uploadDate: number;
     urls: Record<string, string>;
   }[];
-} 
+}
 dotenv.config();
 
 const app = express();
