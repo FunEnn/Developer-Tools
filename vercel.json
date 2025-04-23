@@ -28,6 +28,14 @@
       "continue": true
     },
     {
+      "src": "/(.*\\.css)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "dest": "/$1",
+      "continue": true
+    },
+    {
       "handle": "filesystem"
     },
     {
