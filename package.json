@@ -6,7 +6,7 @@
   "main": "api/index.ts",
   "scripts": {
     "dev": "vite",
-    "dev:server": "tsx watch api/index.ts",
+    "dev:server": "tsx watch src/server/index.ts",
     "start": "node api/index.ts",
     "build": "tsc && vite build",
     "vercel-build": "npm run build",
