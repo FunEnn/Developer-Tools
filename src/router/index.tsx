@@ -57,9 +57,6 @@ export const AiChatbot = React.lazy(
 export const DataVisualization = React.lazy(
   () => import("../components/features/data-visualization/DataVisualization")
 );
-export const TranslatorTool = React.lazy(
-  () => import("../components/features/translator/TranslatorTool")
-);
 
 import {
   Code2,
@@ -77,7 +74,6 @@ import {
   Smile,
   Bot,
   BarChart,
-  Languages
 } from "lucide-react";
 
 export const tools = [
@@ -90,14 +86,7 @@ export const tools = [
         icon: Bot,
         component: AiChatbot,
         description: "智能对话助手，支持多种场景的问答和交互",
-      },
-      {
-        id: "translator",
-        label: "翻译工具",
-        icon: Languages,
-        component: TranslatorTool,
-        description: "多语言翻译工具，支持中英日韩等语言互译",
-      },
+      }
     ],
   },
   {
