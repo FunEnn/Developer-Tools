@@ -51,9 +51,6 @@ export const TypographyTool = React.lazy(
 export const EmojiPicker = React.lazy(
   () => import("../components/features/emoji-tools/EmojiPicker")
 );
-export const AiChatbot = React.lazy(
-  () => import("../components/features/ai-chat/AiChatbot")
-);
 export const DataVisualization = React.lazy(
   () => import("../components/features/data-visualization/DataVisualization")
 );
@@ -72,23 +69,10 @@ import {
   Type,
   FileText,
   Smile,
-  Bot,
   BarChart,
 } from "lucide-react";
 
 export const tools = [
-  {
-    category: "AI工具",
-    items: [
-      {
-        id: "ai-chat",
-        label: "AI助手",
-        icon: Bot,
-        component: AiChatbot,
-        description: "智能对话助手，支持多种场景的问答和交互",
-      }
-    ],
-  },
   {
     category: "编码转换",
     items: [
