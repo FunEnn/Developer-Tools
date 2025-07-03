@@ -7,28 +7,28 @@ import { Skeleton } from '@/components/ui/Skeleton';
 import PixivPage from "@/pages/PixivPage";
 
 export const JsonEditor = React.lazy(
-  () => import("../components/features/json-editor/JsonEditor")
+  () => import("../components/features/dev-tools/JsonEditor")
 );
 export const RegexTester = React.lazy(
-  () => import("../components/features/regex-tester/RegexTester")
+  () => import("../components/features/dev-tools/RegexTester")
 );
 export const ColorPicker = React.lazy(
-  () => import("../components/features/color-picker/ColorPicker")
+  () => import("../components/features/style-tools/ColorPicker")
 );
 export const Base64Tool = React.lazy(
-  () => import("../components/features/base64-tool/Base64Tool")
+  () => import("../components/features/encode-tools/Base64Tool")
 );
 export const TimeConverter = React.lazy(
-  () => import("../components/features/time-converter/TimeConverter")
+  () => import("../components/features/style-tools/TimeConverter")
 );
 export const JwtTool = React.lazy(
-  () => import("../components/features/jwt-tool/JwtTool")
+  () => import("../components/features/encode-tools/JwtTool")
 );
 export const HashTool = React.lazy(
-  () => import("../components/features/hash-tool/HashTool")
+  () => import("../components/features/encode-tools/HashTool")
 );
 export const CodeFormatter = React.lazy(
-  () => import("../components/features/code-formatter/CodeFormatter")
+  () => import("../components/features/dev-tools/CodeFormatter")
 );
 export const ImageConverter = React.lazy(
   () => import("../components/features/image-tools/ImageConverter")
@@ -40,19 +40,19 @@ export const SvgEditor = React.lazy(
   () => import("../components/features/image-tools/SvgEditor")
 );
 export const QrCodeTool = React.lazy(
-  () => import("../components/features/qrcode-tool/QrCodeTool")
+  () => import("../components/features/dev-tools/QrCodeTool")
 );
 export const MarkdownEditor = React.lazy(
-  () => import("../components/features/markdown-editor/MarkdownEditor")
+  () => import("../components/features/dev-tools/MarkdownEditor")
 );
 export const TypographyTool = React.lazy(
   () => import("../components/features/style-tools/TypographyTool")
 );
 export const EmojiPicker = React.lazy(
-  () => import("../components/features/emoji-tools/EmojiPicker")
+  () => import("../components/features/style-tools/emoji-tools/EmojiPicker")
 );
 export const DataVisualization = React.lazy(
-  () => import("../components/features/data-visualization/DataVisualization")
+  () => import("../components/features/dev-tools/DataVisualization")
 );
 
 import {
