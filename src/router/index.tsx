@@ -27,9 +27,6 @@ export const JwtTool = React.lazy(
 export const HashTool = React.lazy(
   () => import("../components/features/encode-tools/HashTool")
 );
-export const CodeFormatter = React.lazy(
-  () => import("../components/features/dev-tools/CodeFormatter")
-);
 export const ImageConverter = React.lazy(
   () => import("../components/features/image-tools/ImageConverter")
 );
@@ -115,13 +112,6 @@ export const tools = [
         icon: Regex,
         component: RegexTester,
         description: "正则表达式在线测试和验证工具",
-      },
-      {
-        id: "format",
-        label: "代码格式化",
-        icon: Code2,
-        component: CodeFormatter,
-        description: "支持多种语言的代码格式化工具",
       },
       {
         id: "qrcode",

@@ -8,7 +8,6 @@ export { default as ImageCompressor } from "./image-tools/ImageCompressor";
 export { default as SvgEditor } from "./image-tools/SvgEditor";
 
 export { QrCodeTool } from "./dev-tools/QrCodeTool";
-export { default as CodeFormatter } from "./dev-tools/CodeFormatter";
 export { default as DataVisualization } from "./dev-tools/DataVisualization";
 export { default as JsonEditor } from "./dev-tools/JsonEditor";
 export { default as MarkdownEditor } from "./dev-tools/MarkdownEditor";
