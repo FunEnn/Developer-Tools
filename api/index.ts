@@ -6,44 +6,6 @@ import axios from "axios";
 // 定义类型
 type PromptTemplate = "social" | "ad" | "article" | "slogan";
 
-// 添加 RichTextChild 类型定义
-interface RichTextChild {
-  text?: string;
-  children?: RichTextChild[];
-  [key: string]: any;
-}
-
-interface TypedRequestBody<T> extends express.Request {
-  body: T;
-}
-
-interface ImageRequest {
-  prompt: string;
-}
-
-interface CodeRequest {
-  prompt: string;
-}
-
-interface TextRequest {
-  template: PromptTemplate;
-  keywords: string;
-}
-
-interface PixivRequest {
-  r18?: number;
-  num?: number;
-  uid?: number[];
-  keyword?: string;
-  tag?: string[];
-  size?: string[];
-  proxy?: string;
-  dateAfter?: number;
-  dateBefore?: number;
-  dsc?: boolean;
-  excludeAI?: boolean;
-  aspectRatio?: string;
-}
 
 interface PixivResponse {
   error: string;
@@ -101,10 +63,10 @@ app.post("/api/pixiv", async (req, res) => {
       }
     );
 
-    console.log('Pixiv API response:', response.data);
+    console.log('Pixiv API response:', response?.data);
 
-    if (response.data.error) {
-      throw new Error(response.data.error);
+    if (!response.data || response.data.error) {
+      throw new Error(response.data?.error || "未知错误");
     }
 
     res.json(response.data);
