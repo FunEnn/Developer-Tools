@@ -65,8 +65,8 @@ app.post("/api/pixiv", async (req, res) => {
 
     console.log('Pixiv API response:', response?.data);
 
-    if (!response.data || response.data.error) {
-      throw new Error(response.data?.error || "未知错误");
+    if (!response || !response.data || response.data.error) {
+      throw new Error(response?.data?.error || "未知错误");
     }
 
     res.json(response.data);

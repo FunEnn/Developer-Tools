@@ -39,7 +39,6 @@
     "rehype-highlight": "^7.0.1",
     "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.5.5",
-    "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
