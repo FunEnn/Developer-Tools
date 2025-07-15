@@ -22,9 +22,6 @@ import {
   CheckSquare,
   AlertTriangle,
 } from "lucide-react";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github-dark.css";
 
 export const MarkdownEditor = () => {
   const [markdown, setMarkdown] = useState("");

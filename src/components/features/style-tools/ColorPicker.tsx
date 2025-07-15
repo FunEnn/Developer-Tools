@@ -13,7 +13,6 @@ const ColorPicker: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"picker" | "palette" | "gradient">(
     "picker"
   );
-  const [isPickerMode, setIsPickerMode] = useState(false);
 
   const colorSchemes: ColorScheme[] = [
     {
