@@ -128,7 +128,7 @@ export const RegexTester = () => {
           </div>
           <button
             onClick={testRegex}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-violet-400 to-indigo-400 
+            className="px-4 py-2 rounded-xl bg-linear-to-r from-violet-400 to-indigo-400 
                    text-white shadow-sm hover:from-violet-500 hover:to-indigo-500 
                    transition-colors"
           >
@@ -151,7 +151,7 @@ export const RegexTester = () => {
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200
                 ${
                   flags.includes(flag.value)
-                    ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white shadow-sm"
+                    ? "bg-linear-to-r from-violet-400 to-indigo-400 text-white shadow-sm"
                     : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-violet-400 dark:hover:border-violet-500"
                 }`}
               title={flag.description}
@@ -186,7 +186,7 @@ export const RegexTester = () => {
                      bg-red-50 dark:bg-red-900/20 
                      text-red-600 dark:text-red-400
                      border border-red-200 dark:border-red-800">
-          <AlertCircle className="w-5 h-5 flex-shrink-0" />
+          <AlertCircle className="w-5 h-5 shrink-0" />
           <p>{error}</p>
         </div>
       )}
@@ -194,7 +194,7 @@ export const RegexTester = () => {
       {/* 匹配结果 */}
       {matches.length > 0 && (
         <div>
-          <h3 className="text-lg font-bold bg-gradient-to-r from-violet-600 to-indigo-600 
+          <h3 className="text-lg font-bold bg-linear-to-r from-violet-600 to-indigo-600 
                       dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent mb-4">
             匹配结果 ({matches.length})
           </h3>

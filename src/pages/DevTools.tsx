@@ -42,14 +42,14 @@ export const DevTools = ({ tools }: DevToolsProps) => {
           <div className="mb-8">
             <div
               className="flex flex-col lg:flex-row lg:items-center lg:justify-between 
-                            bg-gradient-to-r from-pink-50/50 via-purple-50/50 to-indigo-50/50 
+                            bg-linear-to-r from-pink-50/50 via-purple-50/50 to-indigo-50/50 
                             dark:from-pink-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 
                             rounded-2xl p-6 border border-gray-200/50 dark:border-gray-700/50"
             >
               {/* 左侧文本区域 */}
               <div className="space-y-2 mb-4 lg:mb-0">
                 <h2
-                  className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+                  className="text-xl lg:text-2xl font-bold bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 
                                dark:from-pink-400 dark:via-purple-400 dark:to-indigo-400 
                                bg-clip-text text-transparent animate-text"
                 >
@@ -95,14 +95,14 @@ export const DevTools = ({ tools }: DevToolsProps) => {
                 {/* 类型标题 */}
                 <div className="flex items-center gap-3">
                   <h3
-                    className="text-lg font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+                    className="text-lg font-bold bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 
                                dark:from-pink-400 dark:via-purple-400 dark:to-indigo-400 
                                bg-clip-text text-transparent"
                   >
                     {category.category}
                   </h3>
                   <div
-                    className="flex-1 h-[1px] bg-gradient-to-r from-pink-200 via-purple-200 to-transparent 
+                    className="flex-1 h-px bg-linear-to-r from-pink-200 via-purple-200 to-transparent 
                                dark:from-pink-800 dark:via-purple-800 dark:to-transparent
                                opacity-60"
                   ></div>
@@ -124,7 +124,7 @@ export const DevTools = ({ tools }: DevToolsProps) => {
                       >
                         <div className="flex items-center mb-3 lg:mb-4">
                           <div
-                            className="p-2 lg:p-3 rounded-lg bg-gradient-to-br from-pink-50 to-purple-50 
+                            className="p-2 lg:p-3 rounded-lg bg-linear-to-br from-pink-50 to-purple-50 
                                        dark:from-pink-900/20 dark:to-purple-900/20 
                                        group-hover:from-pink-100 group-hover:to-purple-100
                                        dark:group-hover:from-pink-800/30 dark:group-hover:to-purple-800/30
@@ -144,7 +144,7 @@ export const DevTools = ({ tools }: DevToolsProps) => {
                         </div>
 
                         {/* 工具描述 */}
-                        <p className="text-gray-600 dark:text-gray-400 text-xs lg:text-sm min-h-[2.5rem]">
+                        <p className="text-gray-600 dark:text-gray-400 text-xs lg:text-sm min-h-10">
                           {tool.description || "点击开始使用此工具"}
                         </p>
 

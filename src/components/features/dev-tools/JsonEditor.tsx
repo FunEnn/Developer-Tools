@@ -160,7 +160,7 @@ export const JsonEditor = () => {
       <div className="flex gap-2">
         <button
           onClick={formatJson}
-          className="px-4 py-2 rounded-xl bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 
+          className="px-4 py-2 rounded-xl bg-linear-to-r from-violet-400 via-indigo-400 to-blue-400 
                      text-white shadow-sm hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 
                      transition-colors"
         >
@@ -172,7 +172,7 @@ export const JsonEditor = () => {
             setFormatted("");
             setError(null);
           }}
-          className="px-4 py-2 rounded-xl bg-gradient-to-r from-gray-400 to-gray-500
+          className="px-4 py-2 rounded-xl bg-linear-to-r from-gray-400 to-gray-500
                      text-white shadow-sm hover:from-gray-500 hover:to-gray-600 
                      transition-colors"
         >

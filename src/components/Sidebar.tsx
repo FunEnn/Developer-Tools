@@ -50,7 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-6 border-b border-gray-200 dark:border-gray-800">
           <h1
-            className="text-xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+            className="text-xl font-bold bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 
                          dark:from-pink-400 dark:via-purple-400 dark:to-indigo-400 
                          bg-clip-text text-transparent animate-text"
           >
@@ -122,7 +122,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {/* 分类标题 */}
               <div className="flex items-center gap-3 mb-3 px-2">
                 <h2
-                  className="text-xs font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+                  className="text-xs font-bold bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 
                                dark:from-pink-400 dark:via-purple-400 dark:to-indigo-400 
                                bg-clip-text text-transparent uppercase tracking-wider
                                animate-text"
@@ -132,7 +132,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                 {/* 渐变分隔线 */}
                 <div
-                  className="flex-1 h-[1px] bg-gradient-to-r from-pink-200 via-purple-200 to-transparent 
+                  className="flex-1 h-px bg-linear-to-r from-pink-200 via-purple-200 to-transparent 
                                dark:from-pink-800 dark:via-purple-800 dark:to-transparent
                                opacity-60"
                 ></div>

@@ -143,7 +143,7 @@ export const TypographyTool = () => {
       {/* 标题 */}
       <div className="flex items-center justify-between">
         <h3 className="flex items-center gap-2 text-xl font-bold 
-                    bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 
+                    bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 
                     dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 
                     bg-clip-text text-transparent">
           <Type className="w-6 h-6 text-indigo-500 dark:text-indigo-400" />
@@ -190,7 +190,7 @@ export const TypographyTool = () => {
             <button
               key={preset.name}
               onClick={() => applyPreset(preset)}
-              className="flex-shrink-0 w-56 p-4 rounded-xl bg-white dark:bg-gray-800 
+              className="shrink-0 w-56 p-4 rounded-xl bg-white dark:bg-gray-800 
                       border border-gray-200 dark:border-gray-700
                       hover:border-indigo-200 dark:hover:border-indigo-800
                       hover:shadow-lg dark:hover:shadow-indigo-900/20
@@ -220,7 +220,7 @@ export const TypographyTool = () => {
           {presets.map((preset) => (
             <div
               key={preset.name}
-              className="flex-shrink-0 w-56 relative group"
+              className="shrink-0 w-56 relative group"
             >
               <button
                 onClick={() => applyPreset(preset)}
@@ -462,7 +462,7 @@ export const TypographyTool = () => {
               <button
                 onClick={savePreset}
                 className="px-4 py-2 rounded-lg
-                        bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                        bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500
                         text-white shadow-sm
                         hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600
                         transition-colors"
@@ -478,7 +478,7 @@ export const TypographyTool = () => {
       {/* 复制成功提示 */}
       {showCopied && (
         <div className="fixed bottom-4 right-4 
-                     bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                     bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500
                      text-white px-4 py-2 rounded-xl shadow-lg 
                      flex items-center gap-2 animate-fade-in-up">
           <AlertCircle className="w-4 h-4" />

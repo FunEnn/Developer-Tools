@@ -139,7 +139,7 @@ export default function PixivPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-8">
         <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6 dark:bg-blue-900/30 dark:border-blue-800">
           <div className="flex items-start gap-3">
@@ -161,14 +161,14 @@ export default function PixivPage() {
 
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
               随机 Pixiv 图片
             </h1>
           </div>
           <button
             onClick={fetchImages}
             disabled={loading}
-            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2.5 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 transition-all duration-200 shadow-md hover:shadow-lg dark:focus:ring-blue-400 dark:focus:ring-offset-gray-900"
+            className="flex items-center gap-2 bg-linear-to-r from-blue-600 to-blue-700 text-white py-2.5 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 transition-all duration-200 shadow-md hover:shadow-lg dark:focus:ring-blue-400 dark:focus:ring-offset-gray-900"
           >
             {loading ? (
               <>
@@ -339,7 +339,7 @@ export default function PixivPage() {
                         handleTagInput({ key: 'Enter', currentTarget: input } as any);
                       }
                     }}
-                    className="h-11 px-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg dark:focus:ring-blue-400 dark:focus:ring-offset-gray-900"
+                    className="h-11 px-6 bg-linear-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg dark:focus:ring-blue-400 dark:focus:ring-offset-gray-900"
                   >
                     添加
                   </button>
@@ -409,7 +409,7 @@ export default function PixivPage() {
                         onLoad={() => handleImageLoad(imageId)}
                         onError={() => handleImageError(imageId)}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                       <button
                         onClick={() => handleDownload(image)}
                         className="absolute bottom-4 right-4 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-110 dark:bg-gray-800/90 dark:hover:bg-gray-800 dark:text-gray-200"

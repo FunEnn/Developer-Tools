@@ -99,7 +99,7 @@ export const QrCodeTool = () => {
     <div className="space-y-8">
       {/* 生成二维码部分 */}
       <div className="space-y-4">
-        <h3 className="text-lg font-bold bg-gradient-to-r from-violet-600 to-indigo-600 
+        <h3 className="text-lg font-bold bg-linear-to-r from-violet-600 to-indigo-600 
                     dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">
           生成二维码
         </h3>
@@ -209,7 +209,7 @@ export const QrCodeTool = () => {
 
           <button
             onClick={generateQR}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-violet-400 to-indigo-400 
+            className="px-4 py-2 rounded-xl bg-linear-to-r from-violet-400 to-indigo-400 
                    text-white shadow-sm hover:from-violet-500 hover:to-indigo-500 
                    transition-colors"
           >
@@ -229,7 +229,7 @@ export const QrCodeTool = () => {
                 <button
                   onClick={downloadQR}
                   className="flex items-center gap-2 px-4 py-2 rounded-xl
-                         bg-gradient-to-r from-emerald-400 to-green-400
+                         bg-linear-to-r from-emerald-400 to-green-400
                          text-white shadow-sm hover:from-emerald-500 hover:to-green-500 
                          transition-colors"
                 >
@@ -244,7 +244,7 @@ export const QrCodeTool = () => {
 
       {/* 解析二维码部分 */}
       <div className="space-y-4">
-        <h3 className="text-lg font-bold bg-gradient-to-r from-violet-600 to-indigo-600 
+        <h3 className="text-lg font-bold bg-linear-to-r from-violet-600 to-indigo-600 
                     dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">
           解析二维码
         </h3>

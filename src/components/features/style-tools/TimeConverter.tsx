@@ -133,7 +133,7 @@ export const TimeConverter = () => {
       )}
       {/* 结果展示区 */}
       <div className="space-y-4">
-        <h2 className="text-lg font-bold bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">
+        <h2 className="text-lg font-bold bg-linear-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">
           时间格式
         </h2>
         <div className="grid gap-3">

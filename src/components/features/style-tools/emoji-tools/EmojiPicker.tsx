@@ -60,7 +60,7 @@ export const EmojiPicker = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <div className="flex justify-between items-center bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 
+        <h2 className="text-2xl font-bold bg-linear-to-r from-violet-600 to-indigo-600 
                     dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent 
                     flex items-center gap-2">
           <Smile className="w-6 h-6" />
@@ -105,7 +105,7 @@ export const EmojiPicker = () => {
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors
                 ${
                   selectedCategory === category.name
-                    ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white"
+                    ? "bg-linear-to-r from-violet-400 to-indigo-400 text-white"
                     : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20"
                 }`}
             >
@@ -195,7 +195,7 @@ export const EmojiPicker = () => {
       </div>
 
       {copiedEmoji && (
-        <div className="fixed bottom-4 right-4 bg-gradient-to-r from-violet-500 to-indigo-500 
+        <div className="fixed bottom-4 right-4 bg-linear-to-r from-violet-500 to-indigo-500 
                      text-white px-4 py-2 rounded-xl shadow-lg flex items-center gap-2 
                      animate-fade-in-up">
           <Copy className="w-4 h-4" />

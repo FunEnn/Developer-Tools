@@ -349,7 +349,7 @@ const ColorPicker: React.FC = () => {
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
             ${
               activeTab === "picker"
-                ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white"
+                ? "bg-linear-to-r from-violet-400 to-indigo-400 text-white"
                 : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20"
             }`}
         >
@@ -361,7 +361,7 @@ const ColorPicker: React.FC = () => {
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
             ${
               activeTab === "palette"
-                ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white"
+                ? "bg-linear-to-r from-violet-400 to-indigo-400 text-white"
                 : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20"
             }`}
         >
@@ -373,7 +373,7 @@ const ColorPicker: React.FC = () => {
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
             ${
               activeTab === "gradient"
-                ? "bg-gradient-to-r from-violet-400 to-indigo-400 text-white"
+                ? "bg-linear-to-r from-violet-400 to-indigo-400 text-white"
                 : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-violet-900/20"
             }`}
         >
@@ -390,7 +390,7 @@ const ColorPicker: React.FC = () => {
               <HexColorPicker
                 color={color}
                 onChange={setColor}
-                className="w-full !h-48"
+                className="w-full h-48!"
               />
             </div>
             <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm space-y-4">
@@ -452,7 +452,7 @@ const ColorPicker: React.FC = () => {
               <button
                 onClick={() => copyToClipboard(color)}
                 className="flex-1 flex items-center justify-center gap-2 px-4 py-2 
-                         bg-gradient-to-r from-violet-400 to-indigo-400 
+                         bg-linear-to-r from-violet-400 to-indigo-400 
                          hover:from-violet-500 hover:to-indigo-500
                          text-white rounded-xl shadow-sm transition-colors"
               >
@@ -462,7 +462,7 @@ const ColorPicker: React.FC = () => {
               <button
                 onClick={handleColorPick}
                 className="flex items-center justify-center gap-2 px-4 py-2
-                         bg-gradient-to-r from-emerald-400 to-green-400
+                         bg-linear-to-r from-emerald-400 to-green-400
                          hover:from-emerald-500 hover:to-green-500
                          text-white rounded-xl shadow-sm transition-colors"
               >

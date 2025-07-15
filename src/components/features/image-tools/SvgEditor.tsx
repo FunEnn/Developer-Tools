@@ -98,7 +98,7 @@ export const SvgEditor = () => {
       <div className="flex gap-4">
         <button
           onClick={updatePreview}
-          className="px-4 py-2 rounded-xl bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 
+          className="px-4 py-2 rounded-xl bg-linear-to-r from-violet-400 via-indigo-400 to-blue-400 
                    text-white shadow-sm hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 
                    transition-colors"
         >
@@ -106,7 +106,7 @@ export const SvgEditor = () => {
         </button>
         <button
           onClick={downloadSvg}
-          className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-green-400
+          className="px-4 py-2 rounded-xl bg-linear-to-r from-emerald-400 to-green-400
                    text-white shadow-sm hover:from-emerald-500 hover:to-green-500 
                    transition-colors"
         >

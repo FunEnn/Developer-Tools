@@ -46,7 +46,7 @@ export const ImageCompressor = () => {
   return (
     <div className="space-y-6">
       <h3 className="flex items-center gap-2 text-lg font-bold 
-                   bg-gradient-to-r from-emerald-600 to-green-600 
+                   bg-linear-to-r from-emerald-600 to-green-600 
                    dark:from-emerald-400 dark:to-green-400 
                    bg-clip-text text-transparent">
         <ImageDown className="w-6 h-6 text-emerald-500 dark:text-emerald-400" />
@@ -111,7 +111,7 @@ export const ImageCompressor = () => {
 
           <button
             onClick={compressImage}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 via-green-400 to-lime-400 
+            className="px-4 py-2 rounded-xl bg-linear-to-r from-emerald-400 via-green-400 to-lime-400 
                    text-white shadow-sm hover:from-emerald-500 hover:via-green-500 hover:to-lime-500 
                    transition-colors"
           >

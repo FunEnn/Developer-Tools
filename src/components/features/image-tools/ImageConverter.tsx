@@ -46,7 +46,7 @@ export const ImageConverter = () => {
   return (
     <div className="space-y-6">
       <h3 className="flex items-center gap-2 text-lg font-bold 
-                   bg-gradient-to-r from-sky-600 to-cyan-600 
+                   bg-linear-to-r from-sky-600 to-cyan-600 
                    dark:from-sky-400 dark:to-cyan-400 
                    bg-clip-text text-transparent">
         <FileImage className="w-6 h-6 text-sky-500 dark:text-sky-400" />
@@ -116,7 +116,7 @@ export const ImageConverter = () => {
 
           <button
             onClick={convertImage}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 
+            className="px-4 py-2 rounded-xl bg-linear-to-r from-violet-400 via-indigo-400 to-blue-400 
                    text-white shadow-sm hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 
                    transition-colors"
           >

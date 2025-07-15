@@ -44,7 +44,7 @@ export const ToolLayout = ({ children }: ToolLayoutProps) => {
           <div className="flex items-center justify-between px-4 h-16">
             <Link
               to="/"
-              className="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 
+              className="text-xl font-bold bg-linear-to-r from-violet-600 to-indigo-600 
                        dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent"
             >
               DevTools
