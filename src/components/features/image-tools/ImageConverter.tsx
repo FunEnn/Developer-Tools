@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { FileImage, ArrowRight, Download, Upload } from "lucide-react";
 
-export const ImageConverter = () => {
+const ImageConverter = () => {
   const [image, setImage] = useState<string | null>(null);
   const [format, setFormat] = useState("png");
   const canvasRef = useRef<HTMLCanvasElement>(null);

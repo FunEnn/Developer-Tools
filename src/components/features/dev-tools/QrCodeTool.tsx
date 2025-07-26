@@ -13,7 +13,7 @@ export type QROptions = {
   width: number;
 };
 
-export const QrCodeTool = () => {
+const QrCodeTool = () => {
   const [text, setText] = useState("");
   const [qrImage, setQrImage] = useState<string>("");
   const [decodedText, setDecodedText] = useState<string>("");

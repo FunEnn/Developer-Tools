@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Upload } from "lucide-react";
 
-export const SvgEditor = () => {
+const SvgEditor = () => {
   const [svgCode, setSvgCode] = useState("");
   const [preview, setPreview] = useState("");
 

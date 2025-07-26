@@ -22,6 +22,8 @@ import {
   CheckSquare,
   AlertTriangle,
 } from "lucide-react";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 export const MarkdownEditor = () => {
   const [markdown, setMarkdown] = useState("");
@@ -343,8 +345,13 @@ export const MarkdownEditor = () => {
                      border border-gray-200 dark:border-gray-700
                      bg-white dark:bg-gray-800"
           >
-            <div className="prose dark:prose-invert max-w-none">
-              <ReactMarkdown>{markdown || "预览区域"}</ReactMarkdown>
+            <div className="markdown">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight]}
+              >
+                {markdown || "预览区域"}
+              </ReactMarkdown>
             </div>
           </div>
         )}

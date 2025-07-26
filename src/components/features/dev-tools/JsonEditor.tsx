@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 import { Copy, Download, Upload } from "lucide-react";
 
-export const JsonEditor = () => {
+const JsonEditor = () => {
   const [input, setInput] = useState("");
   const [formatted, setFormatted] = useState("");
   const [error, setError] = useState<string | null>(null);

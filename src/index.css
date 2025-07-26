@@ -1,1 +1,119 @@
 @import 'tailwindcss';
+
+/* Markdown 渲染样式 */
+.markdown {
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.markdown h1 {
+  @apply text-3xl font-bold mb-4 mt-6 text-gray-900 dark:text-gray-100;
+}
+
+.markdown h2 {
+  @apply text-2xl font-bold mb-3 mt-5 text-gray-900 dark:text-gray-100;
+}
+
+.markdown h3 {
+  @apply text-xl font-bold mb-2 mt-4 text-gray-900 dark:text-gray-100;
+}
+
+.markdown h4 {
+  @apply text-lg font-bold mb-2 mt-3 text-gray-900 dark:text-gray-100;
+}
+
+.markdown h5 {
+  @apply text-base font-bold mb-2 mt-3 text-gray-900 dark:text-gray-100;
+}
+
+.markdown h6 {
+  @apply text-sm font-bold mb-2 mt-3 text-gray-900 dark:text-gray-100;
+}
+
+.markdown p {
+  @apply mb-4 leading-relaxed;
+}
+
+.markdown ul {
+  @apply mb-4 pl-6 list-disc;
+}
+
+.markdown ol {
+  @apply mb-4 pl-6 list-decimal;
+}
+
+.markdown li {
+  @apply mb-1;
+}
+
+.markdown blockquote {
+  @apply border-l-4 border-violet-500 pl-4 py-2 mb-4 bg-violet-50 dark:bg-violet-900/20 italic;
+}
+
+.markdown code {
+  @apply bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm font-mono text-violet-600 dark:text-violet-400;
+}
+
+.markdown pre {
+  @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 overflow-x-auto;
+}
+
+.markdown pre code {
+  @apply bg-transparent p-0 text-gray-900 dark:text-gray-100;
+}
+
+.markdown a {
+  @apply text-violet-600 dark:text-violet-400 hover:underline;
+}
+
+.markdown strong {
+  @apply font-bold;
+}
+
+.markdown em {
+  @apply italic;
+}
+
+.markdown table {
+  @apply w-full border-collapse mb-4;
+}
+
+.markdown th,
+.markdown td {
+  @apply border border-gray-300 dark:border-gray-600 px-3 py-2 text-left;
+}
+
+.markdown th {
+  @apply bg-gray-100 dark:bg-gray-800 font-semibold;
+}
+
+.markdown img {
+  @apply max-w-full h-auto rounded-lg my-4;
+}
+
+.markdown hr {
+  @apply border-gray-300 dark:border-gray-600 my-6;
+}
+
+/* 代码高亮样式 */
+.hljs {
+  @apply bg-transparent;
+}
+
+/* 任务列表样式 */
+.markdown input[type="checkbox"] {
+  @apply mr-2;
+}
+
+/* 表格样式优化 */
+.markdown table {
+  @apply shadow-sm;
+}
+
+.markdown th {
+  @apply bg-gray-50 dark:bg-gray-700;
+}
+
+/* 链接样式优化 */
+.markdown a:hover {
+  @apply text-violet-700 dark:text-violet-300;
+}

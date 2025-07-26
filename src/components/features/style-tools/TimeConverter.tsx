@@ -8,7 +8,7 @@ import { Copy, Clock, Calendar } from "lucide-react";
 dayjs.extend(utc);
 dayjs.extend(relativeTime); // 用于 fromNow() 方法
 
-export const TimeConverter = () => {
+const TimeConverter = () => {
   // 初始为当前时间
   const [dateTime, setDateTime] = useState(dayjs().format("YYYY-MM-DDTHH:mm:ss"));
   // 时间戳（毫秒）

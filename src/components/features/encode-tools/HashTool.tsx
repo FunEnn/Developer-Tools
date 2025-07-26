@@ -10,7 +10,7 @@ const hashTypes = [
   { label: "RIPEMD160", value: "ripemd160" },
 ];
 
-export const HashTool = () => {
+const HashTool = () => {
   const [input, setInput] = useState("");
   const [selectedHash, setSelectedHash] = useState("md5");
   const [hash, setHash] = useState<String | null>(null);

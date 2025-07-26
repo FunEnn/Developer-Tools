@@ -20,7 +20,7 @@ const commonPatterns = [
   },
 ];
 
-export const RegexTester = () => {
+const RegexTester = () => {
   const [pattern, setPattern] = useState("");
   const [flags, setFlags] = useState("g");
   const [testString, setTestString] = useState("");

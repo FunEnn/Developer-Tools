@@ -16,7 +16,7 @@ interface Preset {
   font: string;
 }
 
-export const TypographyTool = () => {
+const TypographyTool = () => {
   const [text, setText] = useState("The quick brown fox jumps over the lazy dog");
   const [fontProperties, setFontProperties] = useState<FontProperty[]>([
     { property: "font-size", value: 16, unit: "px", min: 8, max: 72, step: 1 },

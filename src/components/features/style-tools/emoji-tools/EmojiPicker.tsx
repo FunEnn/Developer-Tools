@@ -7,7 +7,7 @@ import {
   getEmojisByCategory,
 } from "./emojiData";
 
-export const EmojiPicker = () => {
+const EmojiPicker = () => {
   const [selectedCategory, setSelectedCategory] = useState(emojiData[0].name);
   const [searchTerm, setSearchTerm] = useState("");
   const [recentEmojis, setRecentEmojis] = useState<string[]>([]);

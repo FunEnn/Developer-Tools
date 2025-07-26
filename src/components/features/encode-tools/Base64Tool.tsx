@@ -3,7 +3,7 @@ import { useState } from "react";
 type ConvertMode = "base64" | "url" | "unicode" | "hex";
 type Direction = "encode" | "decode";
 
-export const Base64Tool = () => {
+const Base64Tool = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState<ConvertMode>("base64");

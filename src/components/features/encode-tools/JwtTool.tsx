@@ -6,7 +6,7 @@ interface JwtParts {
   signature: string;
 }
 
-export const JwtTool = () => {
+const JwtTool = () => {
   const [jwt, setJwt] = useState("");
   const [decoded, setDecoded] = useState<JwtParts | null>(null);
   const [error, setError] = useState<string | null>(null);

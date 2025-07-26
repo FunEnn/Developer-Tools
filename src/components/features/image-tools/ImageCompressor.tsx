@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { ImageDown, ArrowRight, Download, Upload, Settings } from "lucide-react";
 
-export const ImageCompressor = () => {
+const ImageCompressor = () => {
   const [image, setImage] = useState<string | null>(null);
   const [quality, setQuality] = useState(80);
   const canvasRef = useRef<HTMLCanvasElement>(null);

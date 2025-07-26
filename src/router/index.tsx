@@ -15,7 +15,7 @@ Object.keys(modules).forEach((path) => {
   if (match) {
     const dir = match[1];
     const file = match[2];
-    const key = `${dir}-${file}`.toLowerCase();
+    const key = `${dir.replace(/\//g, "-")}-${file}`.toLowerCase();
     lazyComponents[key] = React.lazy(modules[path] as any);
   }
 });
